@@ -1,0 +1,24 @@
+{
+  "TAB1": {
+    "GROUP1": {
+      "ENTRIES": {
+        "Test_Prop": {
+          "icon_name": "",
+          "icon_location": "",
+          "owner:": "User",
+          "local_file_location": "path_to_file",
+          "virtual_file_location": "Perforce_path",
+          "metadata": "User entered notes here",
+          "file_extension": ".png"
+        }
+      }
+    }
+  },
+  "TAB2": {
+    "GROUP2": {},
+    "GROUP3": {
+      "GROUP3": {},
+      "ENTRY1": {}
+    }
+  }
+}

@@ -6,8 +6,8 @@ Github: https://github.com/ChrisTwaitees
 """
 import sys
 from utils import path_utils, qt_utils
-from PyQt5.QtCore import (Qt, QMimeData, QRect)
-from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap)
+from PyQt5.QtCore import (Qt, QMimeData, QRect, QByteArray)
+from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap, QCursor, QPainter, QPalette, QPen, QBrush, QColor, QScreen)
 from PyQt5.QtWidgets import (QToolTip,
                              QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
                              qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
@@ -25,11 +25,15 @@ class ContentBrowserUI(QMainWindow):
         self.show()
 
 
+
     def initUI(self):
         # Construction
-        self.setGeometry(400, 400, 400, 400)
+        self.setGeometry(650, 650, 650, 650)
         self.center()
         self.setWindowTitle('Content Browser')
+        self.setWindowFlags(
+            Qt.WindowStaysOnTopHint
+        )
 
         # Formatting
         QToolTip.setFont(QFont('SansSerif', 10))
@@ -109,7 +113,6 @@ class ContentBrowserUI(QMainWindow):
         self.tab_widget = MyTabsWidget(self)
         self.setCentralWidget(self.tab_widget)
 
-
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
@@ -120,7 +123,7 @@ class ContentBrowserUI(QMainWindow):
         QMessageBox.information(self, "DCC ContentBrowser Version Info", "DCC Content Browser {0}".format(self.version))
 
     def open_file_browser(self, start_dir):
-        QFileDialog.getOpenFileName(self, "Open File", path_utils.return_formatted_path(start_dir))
+        QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
         self.statusBar().showMessage("Adding : {0}".format("TestProp"))
 
     def fetch_icon(self, icon_name):
@@ -174,9 +177,9 @@ class MyTabsWidget(QWidget):
         self.tab_widget_container.setLayout(self.tab_widget_container.layout)
 
         # Setting spacing between each icon/widget
-        self.tab_widget_container.layout.setHorizontalSpacing(20)
-        self.tab_widget_container.layout.setVerticalSpacing(20)
-
+        self.tab_widget_container.layout.setHorizontalSpacing(10)
+        self.tab_widget_container.layout.setVerticalSpacing(10
+                                                            )
         # Processing Entries
         self.add_entries()
 
@@ -188,11 +191,9 @@ class MyTabsWidget(QWidget):
         # Adding tab's widget container
         self.tab.layout.addWidget(self.tab_scroll_area)
 
-
         # Add tabs
         self.tabs.addTab(self.tab, "Local")
         self.layout.addWidget(self.tabs)
-
 
     def add_entries(self):
         test = ["hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
@@ -213,10 +214,10 @@ class MyTabsWidget(QWidget):
 
         positions = [(i, j) for i in range(rows) for j in range(columns)]
         for position, name in zip(positions, test):
-            button = MyCustomIconWidget("voronoi.png")
-            button.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
-            self.tab_widget_container.layout.addWidget(button, *position)
-
+            # TODO implement build from metadata
+            browser_icon = MyCustomIconWidget(self, icon_name="voronoi.png")
+            browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
+            self.tab_widget_container.layout.addWidget(browser_icon, *position)
 
     def add_tab(self, new_name):
         new_tab = QWidget()
@@ -229,52 +230,205 @@ class MyTabsWidget(QWidget):
 
 class MyCustomIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
-    def __init__(self, icon_name):
+    def __init__(self, parent, icon_name=""):
         super().__init__()
-        # Drag and Drops
         self.setAcceptDrops(True)
+        self.parent = parent
+        self.icon_name = icon_name
+        self.setText("test")
+        self.local_source_file = "G:/Forgotten Snow White/SnowWhite/assets/Dress/dress_Belt.obj"
+        self.icon_width = 150
+        self.icon_height = 150
 
-        # Getting icon pixmap
-        self.icon_pixmap = self.get_icon(icon_name, pixmap=True, w=100, h=100)
-        self.setPixmap(self.icon_pixmap)
+        # inits
+        self.init_aesthetics()
+        self.init_icon()
 
-    # provides signal as dragging action enters it
-    def dragEnterEvent(self, e):
-        if e.mimeData().hasFormat("text/plain"):
-            print("dragEnterEvent")
-            e.accept()
-        else:
-            e.ignore()
+    def init_aesthetics(self):
+        # Setting Aesthetics
+        self.highlight_colour = self.palette().color(QPalette.Highlight)
+        self.highlight_opacity = 0.23
 
-    # triggers on drop
-    def dropEvent(self, e):
-        print("dropEvent")
+        # Style Sheets
+        self.default_style_sheet = "QLabel {border: 2px solid black;" \
+                      "border-radius: 2px;}"
+        self.highlighted_style_sheet = "QLabel {border: 4px solid blue;" \
+                      "border-radius: 4px;}"
+        self.setStyleSheet(self.default_style_sheet)
 
-    # provides signal as dragging action enters it
-    def dragMoveEvent(self, e):
-        print("dragMovement")
+    def init_icon(self):
+        # Drag and Drops
 
-    # triggers when drag object leaves screenspace of widget
-    def dragLeaveEvent(self, e):
-        print("dragLeaveEvent")
-        self.setPixmap(self.icon_pixmap)
 
+        # Setting default icon pixmap
+        self.default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
+        #TODO establish better method for protecting original icon, QPainter seems to override
+        self.protected_default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
+
+        self.setPixmap(self.default_icon_pixmap)
+
+        # Creating Highlight Overlay
+        self.highlight_pixmap = QPixmap(self.default_icon_pixmap.width(), self.default_icon_pixmap.height())
+        self.highlight_pixmap.fill(self.highlight_colour)
+
+        # Using QPainter in Color Dodge to create overlayed highlight of icon
+        # TODO implent refresh function in order to update icons when replaced
+        self.highlight_painter = QPainter()
+        self.highlight_painter.begin(self.default_icon_pixmap)
+        self.highlight_painter.setCompositionMode(QPainter.CompositionMode_ColorDodge)
+        self.highlight_painter.setOpacity(self.highlight_opacity )
+        self.highlight_painter.drawPixmap(0,0,self.highlight_pixmap)
+        self.highlight_painter.end()
+
+    # MOUSE PRESS EVENTS
     def mousePressEvent(self, e):
         super().mousePressEvent(e)
         if e.button() == Qt.LeftButton:
+            self.drag_start_position = e.pos()
             print('LeftMousePressed')
         if e.button() == Qt.RightButton:
+            # right - click menu
+            right_click_menu = QMenu('Add', self)
+
+            # menu actions
+            # Change Icon
+            change_icon_menu = QMenu("Change Icon...")
+            change_icon_screengrab = QAction("Use the snipping tool", self)
+            change_icon_screengrab.triggered.connect(lambda: self.take_screenshot())
+            change_icon_file = QAction("Choose file from directory...")
+            change_icon_file.triggered.connect(lambda: self.open_file_browser(start_dir=path_utils.get_icon_path()))
+            change_icon_menu.addAction(change_icon_screengrab)
+            change_icon_menu.addAction(change_icon_file)
+            right_click_menu.addMenu(change_icon_menu)
+
+            # Delete Entry
+            delete_entry_action = QAction("Delete Entry...", self)
+            delete_entry_action.triggered.connect(lambda: self.delete_entry())
+            right_click_menu.addAction(delete_entry_action)
+
+            # Go to Local File Location
+            open_file_browser = QAction('Open Local File Directory', self)
+            open_file_browser.triggered.connect(lambda: self.open_file_browser(start_dir=""))
+            right_click_menu.addAction(open_file_browser)
+
+            # Go to Perforce Virtual Location
+            open_perforce_location = QAction('Open Perforce Virtual Location', self)
+            open_perforce_location.triggered.connect(lambda: self.open_file_browser(start_dir=""))
+            right_click_menu.addAction(open_perforce_location)
+
+            # Go to Icon Location
+            open_perforce_location = QAction('Open Icon Source Directory', self)
+            open_perforce_location.triggered.connect(lambda: self.open_file_browser(start_dir=path_utils.get_icon_path()))
+            right_click_menu.addAction(open_perforce_location)
+
+
+
+
+
+
+            right_click_menu.exec_(QCursor.pos())
+
             print('RightMousePressed')
+
+    # CURSOR HOVERS
+    def enterEvent(self, e):
+        self.setStyleSheet(self.highlighted_style_sheet)
+        self.setPixmap(self.default_icon_pixmap)
+
+    def leaveEvent(self, e):
+        self.setStyleSheet(self.default_style_sheet)
+        self.setPixmap(self.protected_default_icon_pixmap)
+
+
+
+    # DRAG AND DROP - LEAVE
+    def mouseMoveEvent(self, e):
+        if not (e.buttons() and Qt.LeftButton):
+            return
+        if (e.pos() - self.drag_start_position).manhattanLength() < QApplication.startDragDistance():
+            return
+        drag = QDrag(self)
+
+
+        # TODO handle QMimeData creation depending on datatype
+        # csvData = QByteArray()
+        # mimedata = QMimeData()
+        #
+        # with open(self.local_source_file) as source:
+        #     data = source.read()
+        # mimedata.setData(self.local_source_file, csvData)
+
+        mimedata = QMimeData()
+        mimedata.setText(self.local_source_file)
+
+        # Drag and dropping data
+        drag.setMimeData(mimedata)
+        pixmap = QPixmap(self.size())
+        painter = QPainter(pixmap)
+        painter.drawPixmap(self.rect(), self.grab())
+        painter.end()
+        drag.setPixmap(pixmap)
+        drag.setHotSpot(e.pos())
+        drag.exec_(Qt.CopyAction | Qt.MoveAction)
+
+    # DRAG AND DROP - ENTER
+    # provides signal as dragging action enters it
+    def dragEnterEvent(self, e):
+        self.setStyleSheet(self.highlighted_style_sheet)
+        self.setPixmap(self.default_icon_pixmap)
+        print("dragEnterEvent")
+
+    def dragLeaveEvent(self, e):
+        print("drag leave event")
+        self.setStyleSheet(self.default_style_sheet)
+        self.setPixmap(self.protected_default_icon_pixmap)
+
+    # triggers on drop
+    def dropEvent(self, e):
+        print("dropEventTriggered" * 40)
+
+    def take_screenshot(self):
+        # TODO implement legitimate screenshot method
+        img = QApplication.primaryScreen().grabWindow(0)
+        img.scaled(100,100, Qt.KeepAspectRatio)
+        self.setPixmap(img)
+
 
     def get_icon(self, icon_name, pixmap=True, icon=False, w=100, h=100):
         if icon:
             icon_type = qt_utils.icons_dict(icon_name)
             return self.style().standardIcon(getattr(QStyle, icon_type))
         elif pixmap:
-            icon_pixmap = QPixmap(path_utils.return_icon_path(icon_name))
+            icon_pixmap = QPixmap(path_utils.get_icon_path(icon_name))
             return icon_pixmap.scaled(w, h, Qt.KeepAspectRatio)
 
 
+    def open_file_browser(self, start_dir):
+        QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
+
+    def refresh_icon(self, icon_name):
+        # TODO implement more robust refresh handling
+        return
+
+    def delete_entry(self):
+        # TODO after removing icon widget, ensure metadata is updated and icon removed
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+
+        msg.setWindowFlags(Qt.WindowStaysOnTopHint)
+        msg.setWindowTitle("Delete Entry Confirmation")
+        msg.setText("Are you sure you want to delete this entry?")
+
+        msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+        if msg.exec_() == QMessageBox.Yes:
+            # TODO remove entry from metadata and remove widget from Gridlayout
+            print("Removing from entry")
+            # Removing widget from parent layout
+            self.setParent(None)
+            self.deleteLater()
+        # TODO reshuffle layout of gridlayout to remove holes in layout
+        else:
+            return
 
 
 if __name__ == '__main__':

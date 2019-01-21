@@ -1,0 +1,87 @@
+import json
+from utils import path_utils
+
+
+class NexusMetaData:
+    def __init__(self):
+        self.config_file_name = "nexus_metadata.nxs"
+        self.config_data_path = path_utils.get_config_path() + self.config_file_name
+        self.data = self.get_metadata()
+
+    def add_new_tab(self, tab_name):
+        if tab_name in self.data.keys():
+            print("Tab name already exists, "
+                  "Please choose a different name.")
+        else:
+            self.data[tab_name] = {}
+            self.write_metadata(self.data)
+
+    def add_new_group(self, tab_name, group_name):
+        if tab_name not in self.data.keys():
+            print("Tab does not exist, cannot add new group")
+            return
+        elif group_name in self.data[tab_name].keys():
+            print("Group name in this Tab already exists, "
+                  "Please choose a different name.")
+            return
+        else:
+            self.data[tab_name][group_name] = {}
+            self.write_metadata(self.data)
+
+    def add_new_entry(self, tab_name, group_name, entry_name):
+        if tab_name not in self.data.keys():
+            print("Tab does not exist")
+            return
+        elif group_name not in self.data[tab_name].keys():
+            print("Group does not exist, cannot add new Entry")
+        elif entry_name in self.data[tab_name][group_name].keys():
+            print("Entry name in this Group already exists, "
+                  "Please choose a different name.")
+        else:
+            self.data[tab_name][group_name][entry_name] = {}
+            self.write_metadata(self.data)
+
+    def get_metadata(self):
+        with open(self.config_data_path) as metadata_file:
+            data = json.load(metadata_file)
+            return data
+
+    def write_metadata(self, data):
+        with open(self.config_data_path, "w") as out:
+            json.dump(data, out, indent=2)
+
+
+test = NexusMetaData()
+print(test.add_new_entry("TAB2", "GROUP3", "ENTRY1"))
+
+data_struct = {
+    # TABS
+    "TAB1":
+        {
+            # GROUPS
+            "GROUP1":
+            {
+                # ENTRIES
+                "ENTRIES":
+                {
+                    # ENTRY example
+                    "Test_Prop": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        #TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                }
+            }
+
+        }
+}
+
+
+
+
+
