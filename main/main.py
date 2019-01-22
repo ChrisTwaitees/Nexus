@@ -11,7 +11,7 @@ from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap, QCursor, QPainter, QPalet
 from PyQt5.QtWidgets import (QToolTip,
                              QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
                              qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
-                             QInputDialog,  QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame)
+                             QHBoxLayout, QInputDialog,  QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView)
 
 
 class ContentBrowserUI(QMainWindow):
@@ -19,16 +19,18 @@ class ContentBrowserUI(QMainWindow):
         super().__init__()
 
         self.version = "v0.1"
+        self.width = 850
+        self.height = 650
         self.initUI()
+        self.initMenuToolBar()
+        self.initWidgets()
 
         # SHOW
         self.show()
 
-
-
     def initUI(self):
         # Construction
-        self.setGeometry(650, 650, 650, 650)
+        self.setGeometry(self.width, self.height, self.width, self.height)
         self.center()
         self.setWindowTitle('Content Browser')
         self.setWindowFlags(
@@ -38,6 +40,7 @@ class ContentBrowserUI(QMainWindow):
         # Formatting
         QToolTip.setFont(QFont('SansSerif', 10))
 
+    def initMenuToolBar(self):
         # STATUS BAR
         self.statusBar().showMessage('Ready')
 
@@ -109,9 +112,24 @@ class ContentBrowserUI(QMainWindow):
         delete_tab_action.triggered.connect(lambda: self.remove_current_tab())
         toolbar.addAction(delete_tab_action)
 
-        # TABS
-        self.tab_widget = MyTabsWidget(self)
-        self.setCentralWidget(self.tab_widget)
+    def initWidgets(self):
+        # WIDGETS
+        # widgets container
+        self.widgets_container = QWidget()
+        self.widgets_container.layout = QHBoxLayout()
+        self.widgets_container.setLayout(self.widgets_container.layout)
+
+        # tree browser widget
+        self.tree_browser = MyTreeBrowserWidget()
+
+        # tabs widget
+        self.tabs_widget = MyTabsWidget(self)
+
+        # adding widgets to widgets container
+        self.widgets_container.layout.addWidget(self.tree_browser)
+        self.widgets_container.layout.addWidget(self.tabs_widget)
+
+        self.setCentralWidget(self.widgets_container)
 
     def center(self):
         qr = self.frameGeometry()
@@ -140,12 +158,25 @@ class ContentBrowserUI(QMainWindow):
         new_tab_label, pressed = QInputDialog.getText(self, "New Tab", "New Tab Name: ", QLineEdit.Normal, "")
         # create new tab
         if pressed and new_tab_label:
-            self.tab_widget.add_tab(new_tab_label)
+            self.tabs_widget.add_tab(new_tab_label)
         else:
             return
 
     def remove_current_tab(self):
-        self.tab_widget.remove_current_tab()
+        self.tabs_widget.remove_current_tab()
+
+
+class MyTreeBrowserWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Entry Browser")
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+        self.tree = QTreeView()
+        self.tree.setAnimated(True)
+
+        self.layout.addWidget(self.tree)
 
 
 class MyTabsWidget(QWidget):
@@ -215,7 +246,7 @@ class MyTabsWidget(QWidget):
         positions = [(i, j) for i in range(rows) for j in range(columns)]
         for position, name in zip(positions, test):
             # TODO implement build from metadata
-            browser_icon = MyCustomIconWidget(self, icon_name="voronoi.png")
+            browser_icon = MyIconWidget(self, icon_name="voronoi.png")
             browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
             self.tab_widget_container.layout.addWidget(browser_icon, *position)
 
@@ -228,7 +259,7 @@ class MyTabsWidget(QWidget):
         return
 
 
-class MyCustomIconWidget(QLabel):
+class MyIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
     def __init__(self, parent, icon_name=""):
         super().__init__()
