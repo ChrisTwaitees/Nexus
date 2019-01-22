@@ -51,8 +51,6 @@ class NexusMetaData:
             json.dump(data, out, indent=2)
 
 
-test = NexusMetaData()
-print(test.add_new_entry("TAB2", "GROUP3", "ENTRY1"))
 
 data_struct = {
     # TABS
@@ -61,9 +59,6 @@ data_struct = {
             # GROUPS
             "GROUP1":
             {
-                # ENTRIES
-                "ENTRIES":
-                {
                     # ENTRY example
                     "Test_Prop": {
                         "icon_name": "",
@@ -75,13 +70,288 @@ data_struct = {
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     }
+            },
+            "GROUP2":
+                {
+                    # ENTRY example
+                    "Test_Prop2": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop3": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop4": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP2":
+                {
+                    # ENTRY example
+                    "Test_Prop5": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop6": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop7": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
                 }
-            }
+
+        },
+    "TAB2":
+        {
+            # GROUPS
+            "GROUP1":
+                {
+                    # ENTRY example
+                    "Test_Prop": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP2":
+                {
+                    # ENTRY example
+                    "Test_Prop2": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop3": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop4": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP2":
+                {
+                    # ENTRY example
+                    "Test_Prop5": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop6": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop7": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                }
+
+        },
+    "TAB3":
+        {
+            # GROUPS
+            "GROUP1":
+                {
+                    # ENTRY example
+                    "Test_Prop": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP2":
+                {
+                    # ENTRY example
+                    "Test_Prop2": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop3": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop4": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP3":
+                {
+                    # ENTRY example
+                    "Test_Prop5": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop6": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop7": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                },
+            "GROUP3":
+                {
+                    # ENTRY example
+                    "Test_Prop5": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop6": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop7": {
+                        "icon_name": "",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner:": "User",
+                        "local_file_location": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    }
+                }
 
         }
 }
 
-
+test = NexusMetaData().write_metadata(data_struct)
 
 
 

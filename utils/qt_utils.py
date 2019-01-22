@@ -13,12 +13,19 @@ import sys
 # reference:https://joekuan.wordpress.com/2015/09/23/list-of-qt-icons/
 def icons_dict(icon_name):
     icon_dict = {"Exit": "SP_BrowserStop", "OpenFile": "SP_DialogOpenButton", "Check": "SP_DialogApplyButton",
-                 "Save": "SP_DialogSaveButton", "Refresh": "SPBrowserReload", "Add": "SP_FileDialogNewFolder",
+                 "Save": "SP_DialogSaveButton", "Refresh": "SP_BrowserReload", "Add": "SP_FileDialogNewFolder",
                  "New": "SP_FileDialogNewFolder", "Delete": "SP_DialogDiscardButton", "Trash": "SP_TrashIcon",
                  "Next": "SP_ToolBarHorizontalExtensionButton", "NewTab": "SP_ToolBarHorizontalExtensionButton",
-                 "Info": "SP_MessageBoxInformation"
+                 "Info": "SP_MessageBoxInformation", "ArrowDown": "SP_ArrowDown", "ArrowUp": "SP_ArrowUp",
+                 "ArrowBack": "SP_ArrowBack", "ArrowLeft": "SP_ArrowLeft", "ArrowRight": "SP_ArrowRight",
+                 "ArrowForward": "SP_ArrowForward"
                  }
     return icon_dict[icon_name]
+
+
+def get_icon(parent, icon_name):
+        icon_type = icons_dict(icon_name)
+        return parent.style().standardIcon(getattr(qw.QStyle, icon_type))
 
 
 class SimpleConfirmDialog(qw.QInputDialog):

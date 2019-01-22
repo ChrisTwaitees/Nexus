@@ -6,12 +6,15 @@ Github: https://github.com/ChrisTwaitees
 """
 import sys
 from utils import path_utils, qt_utils
+from nexus_metadata import nexus_metadata as nxs
 from PyQt5.QtCore import (Qt, QMimeData, QRect, QByteArray)
-from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap, QCursor, QPainter, QPalette, QPen, QBrush, QColor, QScreen)
+from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap, QCursor, QPainter, QPalette, QPen, QBrush, QColor, QScreen,
+                         QStandardItem, QStandardItemModel)
 from PyQt5.QtWidgets import (QToolTip,
                              QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
                              qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
-                             QHBoxLayout, QInputDialog,  QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView)
+                             QHBoxLayout, QInputDialog,  QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView,
+                             QHeaderView, QFileSystemModel, QSizePolicy)
 
 
 class ContentBrowserUI(QMainWindow):
@@ -19,7 +22,8 @@ class ContentBrowserUI(QMainWindow):
         super().__init__()
 
         self.version = "v0.1"
-        self.width = 850
+        self.width = 1000
+
         self.height = 650
         self.initUI()
         self.initMenuToolBar()
@@ -65,6 +69,7 @@ class ContentBrowserUI(QMainWindow):
         import_perf_action.setStatusTip('Adds entry to current tab via Perforce Virtual Path')
         import_perf_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
 
+        # Add from Local Directory Action
         # TODO define start directories externally
         import_local_action = QAction('Add from Local Directory', self)
         import_local_action.setStatusTip('Adds from Local Directory')
@@ -97,7 +102,6 @@ class ContentBrowserUI(QMainWindow):
         add_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
         toolbar.addAction(add_action)
 
-
         # Add Tab
         add_tab_icon = self.fetch_icon("NewTab")
         add_tab_action = QAction(add_tab_icon , "Add New Tab", self)
@@ -111,6 +115,13 @@ class ContentBrowserUI(QMainWindow):
         delete_tab_action.setStatusTip("Deletes Current Tab")
         delete_tab_action.triggered.connect(lambda: self.remove_current_tab())
         toolbar.addAction(delete_tab_action)
+
+        # Refresh TABS and Tree
+        refresh_icon = self.fetch_icon("Refresh")
+        refresh_action = QAction(refresh_icon, "Refresh Nexus", self)
+        refresh_action.setStatusTip("Refreshes Nexus")
+        refresh_action.triggered.connect(lambda: self.refresh_tabs_and_tree())
+        toolbar.addAction(refresh_action)
 
     def initWidgets(self):
         # WIDGETS
@@ -162,21 +173,127 @@ class ContentBrowserUI(QMainWindow):
         else:
             return
 
-    def remove_current_tab(self):
-        self.tabs_widget.remove_current_tab()
+    def refresh_tabs_and_tree(self):
+        # TODO implement refresh for tabs and tree
+        pass
 
 
 class MyTreeBrowserWidget(QWidget):
     def __init__(self):
         super().__init__()
+        self.title = "NEXUS BROWSER: "
+        self.width = 300
+        self.icon_size = 20
+        self.collapsed = False
+        self.initWidget()
 
-        self.setWindowTitle("Entry Browser")
+    def initWidget(self):
+
+        # layout
         self.layout = QVBoxLayout()
+        self.layout.setContentsMargins(5,5,5,5)
         self.setLayout(self.layout)
-        self.tree = QTreeView()
-        self.tree.setAnimated(True)
+        self.setMaximumWidth(self.width)
 
-        self.layout.addWidget(self.tree)
+        # Header and Collapsible
+        self.initCollapsibleHeader()
+
+        # NEXUS
+        self.nxs_tree = QTreeView()
+        self.nxs_tree.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.nxs_tree.customContextMenuRequested.connect(self.open_menu)
+
+        self.nxs_tree.model = QStandardItemModel()
+        self.nxs_tree.model.setHorizontalHeaderLabels([self.tr("Nexus Items")])
+
+        self.add_items(self.nxs_tree.model)
+        self.nxs_tree.setModel(self.nxs_tree.model)
+        self.layout.addWidget(self.nxs_tree)
+
+        # LOCAL
+        self.local_tree = QTreeView()
+        self.local_tree.model = QFileSystemModel()
+        self.local_tree.model.setRootPath("C:/Users/Chris Thwaites/Desktop/IDEs")
+        self.local_tree.setModel(self.local_tree.model)
+        self.local_tree.setAnimated(True)
+
+        self.layout.addWidget(self.local_tree)
+
+    def initCollapsibleHeader(self):
+        # collapse icons
+        self.leftArrow = qt_utils.get_icon(self, "ArrowLeft")
+        self.rightArrow = qt_utils.get_icon(self, "ArrowRight")
+
+        # header widget
+        self.collapsible_header = QWidget()
+        self.collapsible_header.setMaximumWidth(self.width)
+        # layout
+        self.collapsible_header.layout = QHBoxLayout()
+        self.collapsible_header.setLayout(self.collapsible_header.layout)
+
+        # header and button widget
+        self.collapsible_button = QPushButton()
+        self.collapsible_button.clicked.connect(lambda: self.collapse())
+        self.collapsible_button.setIcon(self.leftArrow)
+        self.collapsible_button.setFixedSize(self.icon_size, self.icon_size)
+        self.collapsible_header.layout.addWidget(self.collapsible_button)
+
+        self.header = QLabel(self.title)
+        self.collapsible_header.layout.addWidget(self.header)
+
+
+        # Adding to layout
+        self.layout.addWidget(self.collapsible_header)
+
+
+    def collapse(self):
+        if not self.collapsed:
+            self.header.setText("")
+            self.collapsible_button.setIcon(self.rightArrow)
+            self.setMaximumWidth(self.icon_size*3)
+            self.collapsed = True
+        else:
+            self.header.setText(self.title)
+            self.collapsible_button.setIcon(self.leftArrow)
+            self.setMaximumWidth(self.width)
+            self.collapsed = False
+
+    def add_items(self, parent):
+        nxs_data = nxs.NexusMetaData().get_metadata()
+        if len(nxs_data.keys()):
+            for tab in nxs_data.keys():
+                tab_name = QStandardItem(tab)
+                parent.appendRow(tab_name)
+                for group in nxs_data[tab].keys():
+                    group_name = QStandardItem(group)
+                    tab_name.appendRow(group_name)
+                    for entry in nxs_data[tab][group].keys():
+                        entry_name = QStandardItem(entry)
+                        group_name.appendRow(entry_name)
+
+    def refresh(self):
+        # TODO implement refresh function to delete all entries and then re-add
+        self.add_items(self.local_tree.model)
+
+    def open_menu(self, position):
+        indexes = self.treeView.selectedIndexes()
+        if len(indexes) > 0:
+
+            level = 0
+            index = indexes[0]
+            while index.parent().isValid():
+                index = index.parent()
+                level += 1
+
+        menu = QMenu()
+        if level == 0:
+            menu.addAction(self.tr("Edit person"))
+        elif level == 1:
+            menu.addAction(self.tr("Edit object/container"))
+        elif level == 2:
+            menu.addAction(self.tr("Edit object"))
+
+        menu.exec_(self.treeView.viewport().mapToGlobal(position))
 
 
 class MyTabsWidget(QWidget):
@@ -187,6 +304,10 @@ class MyTabsWidget(QWidget):
         self.layout = QVBoxLayout(self)
         self.setLayout(self.layout)
         self.icon_horizontal_max = 4
+        self.icon_size = 125
+
+        self.icon_spacing = 10
+        self.minimum_width = (self.icon_horizontal_max * self.icon_size) + (self.icon_horizontal_max * self.icon_spacing)
 
         # Tabs Parent
         self.tabs = QTabWidget()
@@ -196,7 +317,9 @@ class MyTabsWidget(QWidget):
         self.tab = QWidget()
 
         # Set tabs layout
+
         self.tab.layout = QVBoxLayout()
+        self.setMinimumWidth(self.minimum_width + self.icon_size)
         self.tab.setLayout(self.tab.layout)
 
         # Creating tab's widget container for scroll area
@@ -208,15 +331,16 @@ class MyTabsWidget(QWidget):
         self.tab_widget_container.setLayout(self.tab_widget_container.layout)
 
         # Setting spacing between each icon/widget
-        self.tab_widget_container.layout.setHorizontalSpacing(10)
-        self.tab_widget_container.layout.setVerticalSpacing(10
-                                                            )
+        self.tab_widget_container.layout.setHorizontalSpacing(self.icon_spacing)
+        self.tab_widget_container.layout.setVerticalSpacing(self.icon_spacing)
         # Processing Entries
         self.add_entries()
 
         # Defining Scroll Area for tab
         self.tab_scroll_area = QScrollArea()
-        self.tab_scroll_area.setGeometry(QRect(0, 0, 200, 200))
+        self.tab_scroll_area.setMinimumWidth(self.minimum_width)
+
+        # Dimension
         self.tab_scroll_area.setWidget(self.tab_widget_container)
 
         # Adding tab's widget container
@@ -246,7 +370,7 @@ class MyTabsWidget(QWidget):
         positions = [(i, j) for i in range(rows) for j in range(columns)]
         for position, name in zip(positions, test):
             # TODO implement build from metadata
-            browser_icon = MyIconWidget(self, icon_name="voronoi.png")
+            browser_icon = MyIconWidget(self, icon_name="voronoi.png", icon_size=self.icon_size)
             browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
             self.tab_widget_container.layout.addWidget(browser_icon, *position)
 
@@ -261,21 +385,24 @@ class MyTabsWidget(QWidget):
 
 class MyIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
-    def __init__(self, parent, icon_name=""):
+    def __init__(self, parent, icon_name="", icon_size=100):
         super().__init__()
         self.setAcceptDrops(True)
         self.parent = parent
         self.icon_name = icon_name
         self.setText("test")
         self.local_source_file = "G:/Forgotten Snow White/SnowWhite/assets/Dress/dress_Belt.obj"
-        self.icon_width = 150
-        self.icon_height = 150
+        self.icon_width = icon_size
+        self.icon_height = icon_size
 
         # inits
         self.init_aesthetics()
         self.init_icon()
 
     def init_aesthetics(self):
+        # Setting Style Frame
+        self.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
+
         # Setting Aesthetics
         self.highlight_colour = self.palette().color(QPalette.Highlight)
         self.highlight_opacity = 0.23
