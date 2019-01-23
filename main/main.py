@@ -311,44 +311,12 @@ class MyTabsWidget(QWidget):
 
         # Tabs Parent
         self.tabs = QTabWidget()
-
-        # TODO implement custom tab widget class to allow dynamic tab creation/deletion
-        # Create first tab
-        self.tab = QWidget()
-
-        # Set tabs layout
-
-        self.tab.layout = QVBoxLayout()
-        self.setMinimumWidth(self.minimum_width + self.icon_size)
-        self.tab.setLayout(self.tab.layout)
-
-        # Creating tab's widget container for scroll area
-        self.tab_widget_container = QWidget()
-        self.tab_widget_container.setAcceptDrops(True)
-
-        # Tab widget layout
-        self.tab_widget_container.layout = QGridLayout()
-        self.tab_widget_container.setLayout(self.tab_widget_container.layout)
-
-        # Setting spacing between each icon/widget
-        self.tab_widget_container.layout.setHorizontalSpacing(self.icon_spacing)
-        self.tab_widget_container.layout.setVerticalSpacing(self.icon_spacing)
-        # Processing Entries
-        self.add_entries()
-
-        # Defining Scroll Area for tab
-        self.tab_scroll_area = QScrollArea()
-        self.tab_scroll_area.setMinimumWidth(self.minimum_width)
-
-        # Dimension
-        self.tab_scroll_area.setWidget(self.tab_widget_container)
-
-        # Adding tab's widget container
-        self.tab.layout.addWidget(self.tab_scroll_area)
+        self.tabs.addTab(MyTabWidget(self), "Test")
 
         # Add tabs
-        self.tabs.addTab(self.tab, "Local")
         self.layout.addWidget(self.tabs)
+
+
 
     def add_entries(self):
         test = ["hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
@@ -381,6 +349,66 @@ class MyTabsWidget(QWidget):
     def remove_current_tab(self):
         # TODO implement removal of currently selected tab
         return
+
+    def add_group(self, tab, group_name):
+        #TODO implementing adding icons to group within tab
+        #TODO consider abstracting goups as a new class
+        self.group_widget = QWidget()
+        self.group_widget.layout = QGridLayout()
+
+
+class MyTabWidget(QWidget):
+    def __init__(self, parent):
+        super().__init__()
+        self.parent = parent
+        self.layout = QVBoxLayout()
+        self.setMinimumWidth(self.parent.minimum_width + self.parent.icon_size)
+        self.setLayout(self.layout)
+        self.setAcceptDrops(True)
+        # self.layout.setHorizontalSpacing(self.parent.icon_spacing)
+        # self.layout.setVerticalSpacing(self.parent.icon_spacing)
+
+        self.layout.addWidget(MyGroupWidget(self.parent))
+
+        # Defining Scroll Area for tab
+        self.scroll_area = QScrollArea()
+        #self.scroll_area.setMinimumWidth(self.parent.minimum_width)
+
+        # Dimension
+        self.scroll_area.setWidget(self)
+
+
+class MyGroupWidget(QWidget):
+    def __init__(self, parent):
+        super().__init__()
+        self.parent = parent
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
+        self.setMinimumWidth(self.parent.minimum_width + self.parent.icon_size)
+        self.add_entries()
+
+    def add_entries(self):
+        test = ["hello", "I", "Had", "No", "Idea"]
+        columns = self.parent.icon_horizontal_max
+
+        if len(test) != 0:
+            if len(test) % self.parent.icon_horizontal_max != 0:
+                rows = int(len(test) / self.parent.icon_horizontal_max) + 1
+            else:
+                rows = int(len(test) / self.parent.icon_horizontal_max)
+        else:
+            return
+
+        positions = [(i, j) for i in range(rows) for j in range(columns)]
+        for position, name in zip(positions, test):
+            # TODO implement build from metadata
+            browser_icon = MyIconWidget(self, icon_name="voronoi.png", icon_size=self.parent.icon_size)
+            browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
+            self.layout.addWidget(browser_icon, *position)
+
+
+
+
 
 
 class MyIconWidget(QLabel):
@@ -496,8 +524,6 @@ class MyIconWidget(QLabel):
     def leaveEvent(self, e):
         self.setStyleSheet(self.default_style_sheet)
         self.setPixmap(self.protected_default_icon_pixmap)
-
-
 
     # DRAG AND DROP - LEAVE
     def mouseMoveEvent(self, e):
