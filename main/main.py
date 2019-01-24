@@ -40,6 +40,13 @@ class ContentBrowserUI(QMainWindow):
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint
         )
+        # stylesheet = \
+        #     ".QWidget {\n" \
+        #     + "border: 20px solid black;\n" \
+        #     + "border-radius: 4px;\n" \
+        #     + "background-color: rgb(255, 255, 255);\n" \
+        #     + "}"
+        # self.setStyleSheet(stylesheet)
 
         # Formatting
         QToolTip.setFont(QFont('SansSerif', 10))
@@ -174,8 +181,7 @@ class ContentBrowserUI(QMainWindow):
             return
 
     def refresh_tabs_and_tree(self):
-        # TODO implement refresh for tabs and tree
-        pass
+        self.tabs_widget.build_tabs()
 
 
 class MyTreeBrowserWidget(QWidget):
@@ -244,7 +250,6 @@ class MyTreeBrowserWidget(QWidget):
 
         # Adding to layout
         self.layout.addWidget(self.collapsible_header)
-
 
     def collapse(self):
         if not self.collapsed:
@@ -316,7 +321,24 @@ class MyTabsWidget(QWidget):
         # Add tabs
         self.layout.addWidget(self.tabs)
 
-
+    def build_tabs(self):
+        # TODO implement building of tabs from nxs data
+        # first clearing the layout
+        qt_utils.delete_widgets_in_layout(self)
+        self.tabs = QTabWidget()
+        nxs_data = nxs.NexusMetaData().get_metadata()
+        if len(nxs_data.keys()):
+            for tab in nxs_data.keys():
+                new_tab = MyTabWidget(self)
+                self.tabs.addTab(new_tab, tab)
+                qt_utils.delete_widgets_in_layout(new_tab)
+                for group in nxs_data[tab].keys():
+                    print("adding groups " + group)
+                    new_group = MyGroupWidget(self, group)
+                    new_tab.layout.addWidget(new_group)
+                    entries = nxs_data[tab][group].keys()
+                    new_group.add_entries(entries)
+        self.layout.addWidget(self.tabs)
 
     def add_entries(self):
         test = ["hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
@@ -360,55 +382,81 @@ class MyTabsWidget(QWidget):
 class MyTabWidget(QWidget):
     def __init__(self, parent):
         super().__init__()
+        # Tabs Layout
         self.parent = parent
-        self.layout = QVBoxLayout()
         self.setMinimumWidth(self.parent.minimum_width + self.parent.icon_size)
+        self.layout = QVBoxLayout()
         self.setLayout(self.layout)
-        self.setAcceptDrops(True)
-        # self.layout.setHorizontalSpacing(self.parent.icon_spacing)
-        # self.layout.setVerticalSpacing(self.parent.icon_spacing)
 
-        self.layout.addWidget(MyGroupWidget(self.parent))
+        # Widgets container for scrollable area
+        self.widget_container = QWidget()
+        self.widget_container.layout = QVBoxLayout()
+        self.widget_container.setLayout(self.widget_container.layout)
+        self.widget_container.layout.addWidget(MyGroupWidget(self.parent, "test"))
 
         # Defining Scroll Area for tab
         self.scroll_area = QScrollArea()
-        #self.scroll_area.setMinimumWidth(self.parent.minimum_width)
 
-        # Dimension
-        self.scroll_area.setWidget(self)
+        # Setting scroll area to widget container and
+        # Adding to scroll area to layout
+        self.scroll_area.setWidget(self.widget_container)
+        self.layout.addWidget(self.scroll_area)
+
+    def add_group(self, group_name):
+        # self.new_group =
+        print("adding group: " + group_name + " to layout")
+        self.widget_container.layout.addWidget(MyGroupWidget(self.parent, group_name))
 
 
 class MyGroupWidget(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, group_name):
         super().__init__()
+        print("Initializing group: " + group_name)
+        # Attrs
         self.parent = parent
-        self.layout = QGridLayout()
+        self.group_name = group_name
+
+        # Layouts
+        self.layout = QVBoxLayout()
         self.setLayout(self.layout)
-        self.setMinimumWidth(self.parent.minimum_width + self.parent.icon_size)
-        self.add_entries()
+        self.setMinimumWidth(self.parent.minimum_width)
 
-    def add_entries(self):
-        test = ["hello", "I", "Had", "No", "Idea"]
+        # Header
+        self.header = QLabel(self.group_name)
+
+        # Icons Widget
+        self.frame = QFrame()
+        self.frame.setFrameStyle(QFrame.Panel | QFrame.Raised)
+        # self.frame.setLayout(self.layout)
+
+        # Icons Group
+        self.icons_widget = QWidget()
+        self.icons_widget.layout = QGridLayout()
+        self.icons_widget.setLayout(self.icons_widget.layout)
+
+        # Aesthetics
+        self.setStyleSheet("background-color: green;")
+
+        # Adding Widgets
+        self.layout.addWidget(self.header)
+        self.layout.addWidget(self.icons_widget)
+        # self.parent.layout.addWidget(self.frame)
+
+    def add_entries(self, entries):
         columns = self.parent.icon_horizontal_max
-
-        if len(test) != 0:
-            if len(test) % self.parent.icon_horizontal_max != 0:
-                rows = int(len(test) / self.parent.icon_horizontal_max) + 1
+        if len(entries) != 0:
+            if len(entries) % columns != 0:
+                rows = int(len(entries) / self.parent.icon_horizontal_max) + 1
             else:
-                rows = int(len(test) / self.parent.icon_horizontal_max)
+                rows = int(len(entries) / self.parent.icon_horizontal_max)
         else:
             return
-
         positions = [(i, j) for i in range(rows) for j in range(columns)]
-        for position, name in zip(positions, test):
+        for position, name in zip(positions, entries):
             # TODO implement build from metadata
             browser_icon = MyIconWidget(self, icon_name="voronoi.png", icon_size=self.parent.icon_size)
             browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
-            self.layout.addWidget(browser_icon, *position)
-
-
-
-
+            self.icons_widget.layout.addWidget(browser_icon, *position)
 
 
 class MyIconWidget(QLabel):

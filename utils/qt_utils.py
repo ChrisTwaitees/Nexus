@@ -48,3 +48,9 @@ def get_user_text(parent, header="", label=""):
 
 def get_user_int(parent, header="", label=""):
     return SimpleConfirmDialog(parent, header, label).get_user_int()
+
+
+def delete_widgets_in_layout(parent):
+    for i in reversed(range(parent.layout.count())):
+        parent.layout.itemAt(i).widget().setParent(None)
+
