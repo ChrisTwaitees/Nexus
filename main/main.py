@@ -147,6 +147,9 @@ class ContentBrowserUI(QMainWindow):
         self.widgets_container.layout.addWidget(self.tree_browser)
         self.widgets_container.layout.addWidget(self.tabs_widget)
 
+        # initializing tabs
+        self.tabs_widget.build_tabs()
+
         self.setCentralWidget(self.widgets_container)
 
     def center(self):
@@ -334,35 +337,12 @@ class MyTabsWidget(QWidget):
                 qt_utils.delete_widgets_in_layout(new_tab)
                 for group in nxs_data[tab].keys():
                     print("adding groups " + group)
-                    new_group = MyGroupWidget(self, group)
+                    new_group = MyGroupWidget(self, group_name=group,
+                                              tab_name=tab)
                     new_tab.layout.addWidget(new_group)
                     entries = nxs_data[tab][group].keys()
                     new_group.add_entries(entries)
         self.layout.addWidget(self.tabs)
-
-    def add_entries(self):
-        test = ["hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
-                "hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
-                "hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
-                "hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
-                "hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes",
-                "hello", "I", "Had", "No", "Idea", "More", "Entries", "Oh Yes"]
-        columns = self.icon_horizontal_max
-
-        if len(test) != 0:
-            if len(test) % self.icon_horizontal_max != 0:
-                rows = int(len(test) / self.icon_horizontal_max) + 1
-            else:
-                rows = int(len(test) / self.icon_horizontal_max)
-        else:
-            return
-
-        positions = [(i, j) for i in range(rows) for j in range(columns)]
-        for position, name in zip(positions, test):
-            # TODO implement build from metadata
-            browser_icon = MyIconWidget(self, icon_name="voronoi.png", icon_size=self.icon_size)
-            browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
-            self.tab_widget_container.layout.addWidget(browser_icon, *position)
 
     def add_tab(self, new_name):
         new_tab = QWidget()
@@ -392,7 +372,6 @@ class MyTabWidget(QWidget):
         self.widget_container = QWidget()
         self.widget_container.layout = QVBoxLayout()
         self.widget_container.setLayout(self.widget_container.layout)
-        self.widget_container.layout.addWidget(MyGroupWidget(self.parent, "test"))
 
         # Defining Scroll Area for tab
         self.scroll_area = QScrollArea()
@@ -409,11 +388,12 @@ class MyTabWidget(QWidget):
 
 
 class MyGroupWidget(QWidget):
-    def __init__(self, parent, group_name):
+    def __init__(self, parent, tab_name, group_name):
         super().__init__()
         print("Initializing group: " + group_name)
-        # Attrs
+        # Attributes
         self.parent = parent
+        self.tab_name = tab_name
         self.group_name = group_name
 
         # Layouts
@@ -423,6 +403,7 @@ class MyGroupWidget(QWidget):
 
         # Header
         self.header = QLabel(self.group_name)
+        self.header.setMaximumHeight(20)
 
         # Icons Widget
         self.frame = QFrame()
