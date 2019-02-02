@@ -61,11 +61,11 @@ data_struct = {
             {
                     # ENTRY example
                     "Test_Prop": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         #TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -75,31 +75,31 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop2": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop3": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop4": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -109,31 +109,31 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop5": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop6": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop7": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -148,11 +148,11 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop": {
-                        "icon_name": "",
+                        "icon_name": "refresh_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -162,11 +162,11 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop2": {
-                        "icon_name": "",
+                        "icon_name": "refresh_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -175,18 +175,18 @@ data_struct = {
                         "icon_name": "",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop4": {
-                        "icon_name": "",
+                        "icon_name": "refresh_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -196,31 +196,31 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop5": {
-                        "icon_name": "",
+                        "icon_name": "refresh_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop6": {
-                        "icon_name": "",
+                        "icon_name": "refresh_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop7": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -235,11 +235,11 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -249,11 +249,11 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop2": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -262,18 +262,18 @@ data_struct = {
                         "icon_name": "",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop4": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -283,31 +283,31 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop5": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop6": {
-                        "icon_name": "",
+                        "icon_name": "voronoi.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop7": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -317,31 +317,91 @@ data_struct = {
                 {
                     # ENTRY example
                     "Test_Prop5": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop6": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop7": {
-                        "icon_name": "",
+                        "icon_name": "export_icon.png",
                         "icon_location": "",
                         # TODO fetch owner of file
-                        "owner:": "User",
-                        "local_file_location": "path_to_file",
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop8": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop9": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop10": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop11": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop12": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                    },
+                    "Test_Prop13": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        # TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"

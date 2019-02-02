@@ -319,7 +319,6 @@ class MyTabsWidget(QWidget):
 
         # Tabs Parent
         self.tabs = QTabWidget()
-        self.tabs.addTab(MyTabWidget(self), "Test")
 
         # Add tabs
         self.layout.addWidget(self.tabs)
@@ -341,7 +340,7 @@ class MyTabsWidget(QWidget):
                                               tab_name=tab)
                     new_tab.layout.addWidget(new_group)
                     entries = nxs_data[tab][group].keys()
-                    new_group.add_entries(entries)
+                    new_group.add_entries(entries, tab_name=tab, group_name=group)
         self.layout.addWidget(self.tabs)
 
     def add_tab(self, new_name):
@@ -382,7 +381,6 @@ class MyTabWidget(QWidget):
         self.layout.addWidget(self.scroll_area)
 
     def add_group(self, group_name):
-        # self.new_group =
         print("adding group: " + group_name + " to layout")
         self.widget_container.layout.addWidget(MyGroupWidget(self.parent, group_name))
 
@@ -395,6 +393,8 @@ class MyGroupWidget(QWidget):
         self.parent = parent
         self.tab_name = tab_name
         self.group_name = group_name
+        self.icon_size = parent.icon_size
+        self.setAcceptDrops(True)
 
         # Layouts
         self.layout = QVBoxLayout()
@@ -423,7 +423,7 @@ class MyGroupWidget(QWidget):
         self.layout.addWidget(self.icons_widget)
         # self.parent.layout.addWidget(self.frame)
 
-    def add_entries(self, entries):
+    def add_entries(self, entries, tab_name, group_name):
         columns = self.parent.icon_horizontal_max
         if len(entries) != 0:
             if len(entries) % columns != 0:
@@ -435,28 +435,81 @@ class MyGroupWidget(QWidget):
         positions = [(i, j) for i in range(rows) for j in range(columns)]
         for position, name in zip(positions, entries):
             # TODO implement build from metadata
-            browser_icon = MyIconWidget(self, icon_name="voronoi.png", icon_size=self.parent.icon_size)
-            browser_icon.setToolTip('This is a <b>QPushButton</b> widget' + str(position))
+            browser_icon = MyIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
             self.icons_widget.layout.addWidget(browser_icon, *position)
+
+    def mousePressEvent(self, e):
+        super().mousePressEvent(e)
+        if e.button() == Qt.RightButton:
+            # right - click menu
+            right_click_menu = QMenu('Add', self)
+
+            # menu actions
+            add_entry_menu = QMenu("Add New Entry...")
+            add_entry_action = QAction("Open File Browser", self)
+            add_entry_action.triggered.connect(lambda: self.right_click_add_entry(start_dir=path_utils.get_icon_path()))
+            add_entry_menu.addAction(add_entry_action)
+
+            right_click_menu.addMenu(add_entry_menu)
+
+            right_click_menu.exec_(QCursor.pos())
+
+            print('RightMousePressed')
+
+    def right_click_add_entry(self, start_dir=""):
+        filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
+        self.add_new_entry(filepath)
+
+    def add_new_entry(self, filepath=""):
+        pass
+
 
 
 class MyIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
-    def __init__(self, parent, icon_name="", icon_size=100):
+    def __init__(self, parent, tab_name="", group_name="", entry_name=""):
         super().__init__()
         self.setAcceptDrops(True)
         self.parent = parent
-        self.icon_name = icon_name
-        self.setText("test")
-        self.local_source_file = "G:/Forgotten Snow White/SnowWhite/assets/Dress/dress_Belt.obj"
-        self.icon_width = icon_size
-        self.icon_height = icon_size
+        self.tab_name = tab_name
+        self.group_name = group_name
+        self.entry_name = entry_name
+        self.icon_width = parent.icon_size
+        self.icon_height = parent.icon_size
 
         # inits
+        self.init_metadata()
+        self.set_toolTip()
         self.init_aesthetics()
         self.init_icon()
 
+    def init_metadata(self):
+        nxs_data = nxs.NexusMetaData().get_metadata()
+        if self.tab_name in nxs_data.keys() and self.group_name in nxs_data[self.tab_name].keys():
+            entry_dict = nxs_data[self.tab_name][self.group_name][self.entry_name]
+            print(self.entry_name, entry_dict)
+            self.icon_name = entry_dict["icon_name"]
+            self.icon_location = entry_dict["icon_location"]
+            self.owner = entry_dict["owner"]
+            self.local_source_file = entry_dict["local_source_file"]
+            self.virtual_file_location = entry_dict["virtual_file_location"]
+            self.metadata = entry_dict["metadata"]
+            self.file_extension = entry_dict["file_extension"]
+        else:
+            # defaults
+            pass
+
+    def set_toolTip(self):
+        toolTip = "<b>{0}<b>\n<b>Source Location:<b> {1}\n<b>Extension:<b> {2}".format(self.entry_name,
+                                                                                       self.local_source_file,
+                                                                                       self.file_extension)
+        self.setToolTip(toolTip)
+
     def init_aesthetics(self):
+        # Setting Size
+        self.setMaximumWidth(self.icon_width)
+        self.setMaximumHeight(self.icon_width)
+
         # Setting Style Frame
         self.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
 
@@ -472,9 +525,6 @@ class MyIconWidget(QLabel):
         self.setStyleSheet(self.default_style_sheet)
 
     def init_icon(self):
-        # Drag and Drops
-
-
         # Setting default icon pixmap
         self.default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
         #TODO establish better method for protecting original icon, QPainter seems to override
@@ -606,7 +656,6 @@ class MyIconWidget(QLabel):
         img.scaled(100,100, Qt.KeepAspectRatio)
         self.setPixmap(img)
 
-
     def get_icon(self, icon_name, pixmap=True, icon=False, w=100, h=100):
         if icon:
             icon_type = qt_utils.icons_dict(icon_name)
@@ -614,7 +663,6 @@ class MyIconWidget(QLabel):
         elif pixmap:
             icon_pixmap = QPixmap(path_utils.get_icon_path(icon_name))
             return icon_pixmap.scaled(w, h, Qt.KeepAspectRatio)
-
 
     def open_file_browser(self, start_dir):
         QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
