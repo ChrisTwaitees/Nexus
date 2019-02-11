@@ -5,53 +5,49 @@ Author: Chris Thwaites
 Github: https://github.com/ChrisTwaitees
 """
 import sys
-from utils import path_utils, qt_utils
+from utils import path_utils
+from utils.gui_utils import pyqt_utils
 from nexus_metadata import nexus_metadata as nxs
-from PyQt5.QtCore import (Qt, QMimeData, QRect, QByteArray)
-from PyQt5.QtGui import (QFont, QIcon, QDrag, QPixmap, QCursor, QPainter, QPalette, QPen, QBrush, QColor, QScreen,
-                         QStandardItem, QStandardItemModel)
+from PyQt5.QtCore import (Qt, QMimeData)
+from PyQt5.QtGui import (QFont, QDrag, QPixmap, QCursor, QPainter, QPalette, QStandardItem, QStandardItemModel)
 from PyQt5.QtWidgets import (QToolTip,
                              QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
                              qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
-                             QHBoxLayout, QInputDialog,  QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView,
-                             QHeaderView, QFileSystemModel, QSizePolicy)
+                             QHBoxLayout, QInputDialog, QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView)
 
 
-class ContentBrowserUI(QMainWindow):
+class NXS_UI(QMainWindow):
     def __init__(self):
-        super().__init__()
+        super(NXS_UI, self).__init__()
 
+        # GLOBALS
         self.version = "v0.1"
-        self.width = 1000
+        self.width = 750.0
+        self.height = 500.0
 
-        self.height = 650
-        self.initUI()
-        self.initMenuToolBar()
-        self.initWidgets()
+        # BUILD
+        self.create_UI()
+        self.create_menu_bar()
+        self.create_widgets()
+        pyqt_utils.set_stylesheet(self, "darkorange")
 
         # SHOW
         self.show()
 
-    def initUI(self):
+    def create_UI(self):
         # Construction
-        self.setGeometry(self.width, self.height, self.width, self.height)
-        self.center()
-        self.setWindowTitle('Content Browser')
+        self.setWindowTitle('NXS Content Browser')
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint
         )
-        # stylesheet = \
-        #     ".QWidget {\n" \
-        #     + "border: 20px solid black;\n" \
-        #     + "border-radius: 4px;\n" \
-        #     + "background-color: rgb(255, 255, 255);\n" \
-        #     + "}"
-        # self.setStyleSheet(stylesheet)
+
+        self.setMinimumSize(self.width, self.height)
+        self.center()
 
         # Formatting
         QToolTip.setFont(QFont('SansSerif', 10))
 
-    def initMenuToolBar(self):
+    def create_menu_bar(self):
         # STATUS BAR
         self.statusBar().showMessage('Ready')
 
@@ -130,7 +126,7 @@ class ContentBrowserUI(QMainWindow):
         refresh_action.triggered.connect(lambda: self.refresh_tabs_and_tree())
         toolbar.addAction(refresh_action)
 
-    def initWidgets(self):
+    def create_widgets(self):
         # WIDGETS
         # widgets container
         self.widgets_container = QWidget()
@@ -138,10 +134,10 @@ class ContentBrowserUI(QMainWindow):
         self.widgets_container.setLayout(self.widgets_container.layout)
 
         # tree browser widget
-        self.tree_browser = MyTreeBrowserWidget()
+        self.tree_browser = NXSTreeBrowserWidget()
 
         # tabs widget
-        self.tabs_widget = MyTabsWidget(self)
+        self.tabs_widget = NXSTabsWidget(self)
 
         # adding widgets to widgets container
         self.widgets_container.layout.addWidget(self.tree_browser)
@@ -159,14 +155,14 @@ class ContentBrowserUI(QMainWindow):
         self.move(qr.topLeft())
 
     def display_version_info(self):
-        QMessageBox.information(self, "DCC ContentBrowser Version Info", "DCC Content Browser {0}".format(self.version))
+        QMessageBox.information(self, "ContentBrowser Version Info", "DCC Content Browser {0}".format(self.version))
 
     def open_file_browser(self, start_dir):
         QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
         self.statusBar().showMessage("Adding : {0}".format("TestProp"))
 
     def fetch_icon(self, icon_name):
-        icon_type = qt_utils.icons_dict(icon_name)
+        icon_type = pyqt_utils.icons_dict(icon_name)
         return self.style().standardIcon(getattr(QStyle, icon_type))
 
     def delete_entry(self):
@@ -187,7 +183,7 @@ class ContentBrowserUI(QMainWindow):
         self.tabs_widget.build_tabs()
 
 
-class MyTreeBrowserWidget(QWidget):
+class NXSTreeBrowserWidget(QWidget):
     def __init__(self):
         super().__init__()
         self.title = "NEXUS BROWSER: "
@@ -219,19 +215,10 @@ class MyTreeBrowserWidget(QWidget):
         self.nxs_tree.setModel(self.nxs_tree.model)
         self.layout.addWidget(self.nxs_tree)
 
-        # LOCAL
-        self.local_tree = QTreeView()
-        self.local_tree.model = QFileSystemModel()
-        self.local_tree.model.setRootPath("C:/Users/Chris Thwaites/Desktop/IDEs")
-        self.local_tree.setModel(self.local_tree.model)
-        self.local_tree.setAnimated(True)
-
-        self.layout.addWidget(self.local_tree)
-
     def initCollapsibleHeader(self):
         # collapse icons
-        self.leftArrow = qt_utils.get_icon(self, "ArrowLeft")
-        self.rightArrow = qt_utils.get_icon(self, "ArrowRight")
+        self.leftArrow = pyqt_utils.get_icon(self, "ArrowLeft")
+        self.rightArrow = pyqt_utils.get_icon(self, "ArrowRight")
 
         # header widget
         self.collapsible_header = QWidget()
@@ -304,7 +291,7 @@ class MyTreeBrowserWidget(QWidget):
         menu.exec_(self.treeView.viewport().mapToGlobal(position))
 
 
-class MyTabsWidget(QWidget):
+class NXSTabsWidget(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
 
@@ -326,18 +313,18 @@ class MyTabsWidget(QWidget):
     def build_tabs(self):
         # TODO implement building of tabs from nxs data
         # first clearing the layout
-        qt_utils.delete_widgets_in_layout(self)
+        pyqt_utils.delete_widgets_in_layout(self)
         self.tabs = QTabWidget()
         nxs_data = nxs.NexusMetaData().get_metadata()
         if len(nxs_data.keys()):
             for tab in nxs_data.keys():
-                new_tab = MyTabWidget(self)
+                new_tab = NXSTabWidget(self)
                 self.tabs.addTab(new_tab, tab)
-                qt_utils.delete_widgets_in_layout(new_tab)
+                pyqt_utils.delete_widgets_in_layout(new_tab)
                 for group in nxs_data[tab].keys():
                     print("adding groups " + group)
-                    new_group = MyGroupWidget(self, group_name=group,
-                                              tab_name=tab)
+                    new_group = NXSGroupWidget(self, group_name=group,
+                                               tab_name=tab)
                     new_tab.layout.addWidget(new_group)
                     entries = nxs_data[tab][group].keys()
                     new_group.add_entries(entries, tab_name=tab, group_name=group)
@@ -358,7 +345,7 @@ class MyTabsWidget(QWidget):
         self.group_widget.layout = QGridLayout()
 
 
-class MyTabWidget(QWidget):
+class NXSTabWidget(QWidget):
     def __init__(self, parent):
         super().__init__()
         # Tabs Layout
@@ -382,12 +369,12 @@ class MyTabWidget(QWidget):
 
     def add_group(self, group_name):
         print("adding group: " + group_name + " to layout")
-        self.widget_container.layout.addWidget(MyGroupWidget(self.parent, group_name))
+        self.widget_container.layout.addWidget(NXSGroupWidget(self.parent, group_name))
 
 
-class MyGroupWidget(QWidget):
+class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
     def __init__(self, parent, tab_name, group_name):
-        super().__init__()
+        super(NXSGroupWidget, self).__init__(group_name)
         print("Initializing group: " + group_name)
         # Attributes
         self.parent = parent
@@ -400,10 +387,8 @@ class MyGroupWidget(QWidget):
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.setMinimumWidth(self.parent.minimum_width)
+        self.setMaximumHeight(33)
 
-        # Header
-        self.header = QLabel(self.group_name)
-        self.header.setMaximumHeight(20)
 
         # Icons Widget
         self.frame = QFrame()
@@ -415,13 +400,8 @@ class MyGroupWidget(QWidget):
         self.icons_widget.layout = QGridLayout()
         self.icons_widget.setLayout(self.icons_widget.layout)
 
-        # Aesthetics
-        self.setStyleSheet("background-color: green;")
-
         # Adding Widgets
-        self.layout.addWidget(self.header)
         self.layout.addWidget(self.icons_widget)
-        # self.parent.layout.addWidget(self.frame)
 
     def add_entries(self, entries, tab_name, group_name):
         columns = self.parent.icon_horizontal_max
@@ -435,7 +415,7 @@ class MyGroupWidget(QWidget):
         positions = [(i, j) for i in range(rows) for j in range(columns)]
         for position, name in zip(positions, entries):
             # TODO implement build from metadata
-            browser_icon = MyIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
+            browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
             self.icons_widget.layout.addWidget(browser_icon, *position)
 
     def mousePressEvent(self, e):
@@ -465,7 +445,7 @@ class MyGroupWidget(QWidget):
 
 
 
-class MyIconWidget(QLabel):
+class NXSIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
     def __init__(self, parent, tab_name="", group_name="", entry_name=""):
         super().__init__()
@@ -658,7 +638,7 @@ class MyIconWidget(QLabel):
 
     def get_icon(self, icon_name, pixmap=True, icon=False, w=100, h=100):
         if icon:
-            icon_type = qt_utils.icons_dict(icon_name)
+            icon_type = pyqt_utils.icons_dict(icon_name)
             return self.style().standardIcon(getattr(QStyle, icon_type))
         elif pixmap:
             icon_pixmap = QPixmap(path_utils.get_icon_path(icon_name))
@@ -694,5 +674,5 @@ class MyIconWidget(QLabel):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = ContentBrowserUI()
+    ex = NXS_UI()
     sys.exit(app.exec_())

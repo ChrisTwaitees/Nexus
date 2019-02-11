@@ -29,6 +29,16 @@ class NexusMetaData:
             self.write_metadata(self.data)
 
     def add_new_entry(self, tab_name, group_name, entry_name):
+        entry_dict =    {"Entry": {
+                        "icon_name": "export_icon.png",
+                        "icon_location": "",
+                        #TODO fetch owner of file
+                        "owner": "User",
+                        "local_source_file": "path_to_file",
+                        "virtual_file_location": "Perforce_path",
+                        "metadata": "User entered notes here",
+                        "file_extension": ".png"
+                        }}
         if tab_name not in self.data.keys():
             print("Tab does not exist")
             return
@@ -411,7 +421,7 @@ data_struct = {
         }
 }
 
-test = NexusMetaData().write_metadata(data_struct)
+#test = NexusMetaData().write_metadata(data_struct)
 
 
 
