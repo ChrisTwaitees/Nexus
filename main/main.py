@@ -1,19 +1,22 @@
 """
+Nexus
 DCC Independent Content Browser
 
 Author: Chris Thwaites
 Github: https://github.com/ChrisTwaitees
 """
 import sys
+import webbrowser
 from utils import path_utils
 from utils.gui_utils import pyqt_utils
 from nexus_metadata import nexus_metadata as nxs
 from PyQt5.QtCore import (Qt, QMimeData)
-from PyQt5.QtGui import (QFont, QDrag, QPixmap, QCursor, QPainter, QPalette, QStandardItem, QStandardItemModel)
+from PyQt5.QtGui import (QFont, QCursor, QDrag, QPixmap, QCursor, QPainter, QPalette, QStandardItem, QStandardItemModel)
 from PyQt5.QtWidgets import (QToolTip,
                              QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
                              qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
-                             QHBoxLayout, QInputDialog, QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView)
+                             QHBoxLayout, QGroupBox, QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView,
+                             QSizePolicy)
 
 
 class NXS_UI(QMainWindow):
@@ -22,14 +25,19 @@ class NXS_UI(QMainWindow):
 
         # GLOBALS
         self.version = "v0.1"
+        self.docs = "https://github.com/ChrisTwaitees/Nexus/blob/master/README.md"
         self.width = 750.0
         self.height = 500.0
+        self.icon_size = 125
 
         # BUILD
         self.create_UI()
         self.create_menu_bar()
         self.create_widgets()
         pyqt_utils.set_stylesheet(self, "darkorange")
+
+        # LOAD DATA
+        self.load_nxs_data()
 
         # SHOW
         self.show()
@@ -43,9 +51,6 @@ class NXS_UI(QMainWindow):
 
         self.setMinimumSize(self.width, self.height)
         self.center()
-
-        # Formatting
-        QToolTip.setFont(QFont('SansSerif', 10))
 
     def create_menu_bar(self):
         # STATUS BAR
@@ -66,11 +71,6 @@ class NXS_UI(QMainWindow):
 
         # Add Action
         import_menu = QMenu('Add', self)
-        # TODO connect path reader and perforce integration
-        import_icon = self.fetch_icon("OpenFile")
-        import_perf_action = QAction(import_icon, 'Add from P4F', self)
-        import_perf_action.setStatusTip('Adds entry to current tab via Perforce Virtual Path')
-        import_perf_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
 
         # Add from Local Directory Action
         # TODO define start directories externally
@@ -78,7 +78,6 @@ class NXS_UI(QMainWindow):
         import_local_action.setStatusTip('Adds from Local Directory')
         import_local_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
         import_menu.addAction(import_local_action)
-        import_menu.addAction(import_perf_action)
         file_menu.addMenu(import_menu)
 
         # INFO MENU
@@ -91,6 +90,16 @@ class NXS_UI(QMainWindow):
         info_act.triggered.connect(lambda: self.display_version_info())
 
         info_menu.addAction(info_act)
+
+
+        # Help Action
+        help_icon = self.fetch_icon("Help")
+        help_act = QAction(help_icon, '&Open Support Page', self)
+        help_act.setShortcut('Ctrl+H')
+        help_act.setStatusTip("Open Tool's Support Page")
+        help_act.triggered.connect(lambda: self.open_webbrowser(self.docs))
+        info_menu.addAction(help_act)
+
 
         # TOOL BAR
         # TODO implement icon based utilities like loading, adding, assigning icon to selection, opening metadata source
@@ -105,25 +114,11 @@ class NXS_UI(QMainWindow):
         add_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
         toolbar.addAction(add_action)
 
-        # Add Tab
-        add_tab_icon = self.fetch_icon("NewTab")
-        add_tab_action = QAction(add_tab_icon , "Add New Tab", self)
-        add_tab_action.setStatusTip("Adds New Custom Tab")
-        add_tab_action.triggered.connect(lambda: self.add_tab())
-        toolbar.addAction(add_tab_action)
-
-        # Delete tab
-        delete_tab_icon = self.fetch_icon("Trash")
-        delete_tab_action = QAction(delete_tab_icon , "Delete Current Tab", self)
-        delete_tab_action.setStatusTip("Deletes Current Tab")
-        delete_tab_action.triggered.connect(lambda: self.remove_current_tab())
-        toolbar.addAction(delete_tab_action)
-
         # Refresh TABS and Tree
         refresh_icon = self.fetch_icon("Refresh")
         refresh_action = QAction(refresh_icon, "Refresh Nexus", self)
         refresh_action.setStatusTip("Refreshes Nexus")
-        refresh_action.triggered.connect(lambda: self.refresh_tabs_and_tree())
+        refresh_action.triggered.connect(lambda: self.refresh())
         toolbar.addAction(refresh_action)
 
     def create_widgets(self):
@@ -144,9 +139,29 @@ class NXS_UI(QMainWindow):
         self.widgets_container.layout.addWidget(self.tabs_widget)
 
         # initializing tabs
-        self.tabs_widget.build_tabs()
-
         self.setCentralWidget(self.widgets_container)
+
+    def load_nxs_data(self):
+        # Load NXS Metadata
+        nxs_data = nxs.NexusMetaData().get_metadata()
+        # Clear Tabs Layout
+        pyqt_utils.delete_widgets_in_layout(self.tabs_widget)
+        self.tabs_widget.tabs = QTabWidget()
+        # Building Tabs from Data
+        if len(nxs_data.keys()):
+            for tab in nxs_data.keys():
+                new_tab = NXSTabWidget(parent=self.tabs_widget, name=tab)
+                self.tabs_widget.tabs.addTab(new_tab, tab)
+                for group in nxs_data[tab].keys():
+                    new_group = NXSGroupWidget(self.tabs_widget, group_name=group,
+                                               tab_name=tab)
+                    new_tab.widget_container.layout.addWidget(new_group)
+                    entries = nxs_data[tab][group].keys()
+                    new_group.add_entries(entries, tab_name=tab, group_name=group)
+        self.tabs_widget.layout.addWidget(self.tabs_widget.tabs)
+
+    def refresh(self):
+        self.load_nxs_data()
 
     def center(self):
         qr = self.frameGeometry()
@@ -165,22 +180,8 @@ class NXS_UI(QMainWindow):
         icon_type = pyqt_utils.icons_dict(icon_name)
         return self.style().standardIcon(getattr(QStyle, icon_type))
 
-    def delete_entry(self):
-        # TODO implement removal of entry in content browser and metadata file
-        self.statusBar().showMessage("Removing : {0}".format("TestProp"))
-
-    def add_tab(self):
-        # TODO implement the adding of tabs dynamically
-        # ask user for the name of the new tab
-        new_tab_label, pressed = QInputDialog.getText(self, "New Tab", "New Tab Name: ", QLineEdit.Normal, "")
-        # create new tab
-        if pressed and new_tab_label:
-            self.tabs_widget.add_tab(new_tab_label)
-        else:
-            return
-
-    def refresh_tabs_and_tree(self):
-        self.tabs_widget.build_tabs()
+    def open_webbrowser(self, url):
+        webbrowser.open(url, new=0, autoraise=1)
 
 
 class NXSTreeBrowserWidget(QWidget):
@@ -190,9 +191,9 @@ class NXSTreeBrowserWidget(QWidget):
         self.width = 300
         self.icon_size = 20
         self.collapsed = False
-        self.initWidget()
+        self.create_layout()
 
-    def initWidget(self):
+    def create_layout(self):
 
         # layout
         self.layout = QVBoxLayout()
@@ -201,7 +202,7 @@ class NXSTreeBrowserWidget(QWidget):
         self.setMaximumWidth(self.width)
 
         # Header and Collapsible
-        self.initCollapsibleHeader()
+        self.create_arrowed_header()
 
         # NEXUS
         self.nxs_tree = QTreeView()
@@ -215,7 +216,7 @@ class NXSTreeBrowserWidget(QWidget):
         self.nxs_tree.setModel(self.nxs_tree.model)
         self.layout.addWidget(self.nxs_tree)
 
-    def initCollapsibleHeader(self):
+    def create_arrowed_header(self):
         # collapse icons
         self.leftArrow = pyqt_utils.get_icon(self, "ArrowLeft")
         self.rightArrow = pyqt_utils.get_icon(self, "ArrowRight")
@@ -294,15 +295,20 @@ class NXSTreeBrowserWidget(QWidget):
 class NXSTabsWidget(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
+        self.parent = parent
 
         # Tabs layout
         self.layout = QVBoxLayout(self)
         self.setLayout(self.layout)
-        self.icon_horizontal_max = 4
-        self.icon_size = 125
 
+        # Icons
+        self.icon_horizontal_max = 4
+        self.icon_size = parent.icon_size
         self.icon_spacing = 10
-        self.minimum_width = (self.icon_horizontal_max * self.icon_size) + (self.icon_horizontal_max * self.icon_spacing)
+
+        # Dimensions
+        self.minimum_width = (self.icon_horizontal_max * self.icon_size) + (
+                    self.icon_horizontal_max * self.icon_spacing)
 
         # Tabs Parent
         self.tabs = QTabWidget()
@@ -310,66 +316,129 @@ class NXSTabsWidget(QWidget):
         # Add tabs
         self.layout.addWidget(self.tabs)
 
-    def build_tabs(self):
-        # TODO implement building of tabs from nxs data
-        # first clearing the layout
-        pyqt_utils.delete_widgets_in_layout(self)
-        self.tabs = QTabWidget()
-        nxs_data = nxs.NexusMetaData().get_metadata()
-        if len(nxs_data.keys()):
-            for tab in nxs_data.keys():
-                new_tab = NXSTabWidget(self)
-                self.tabs.addTab(new_tab, tab)
-                pyqt_utils.delete_widgets_in_layout(new_tab)
-                for group in nxs_data[tab].keys():
-                    print("adding groups " + group)
-                    new_group = NXSGroupWidget(self, group_name=group,
-                                               tab_name=tab)
-                    new_tab.layout.addWidget(new_group)
-                    entries = nxs_data[tab][group].keys()
-                    new_group.add_entries(entries, tab_name=tab, group_name=group)
-        self.layout.addWidget(self.tabs)
+        self.tab_index = None
 
-    def add_tab(self, new_name):
-        new_tab = QWidget()
-        self.tabs.addTab(new_tab, new_name)
+    def mousePressEvent(self, e):
+        super().mousePressEvent(e)
+        if e.button() == Qt.RightButton:
+            # right - click menu
+            right_click_menu = QMenu('Add', self)
 
-    def remove_current_tab(self):
-        # TODO implement removal of currently selected tab
-        return
+            # menu actions
+            add_tab_action = QAction("Add new Tab...", self)
+            add_tab_action.triggered.connect(lambda: self.add_tab(user=True))
+            right_click_menu.addAction(add_tab_action)
 
-    def add_group(self, tab, group_name):
-        #TODO implementing adding icons to group within tab
-        #TODO consider abstracting goups as a new class
-        self.group_widget = QWidget()
-        self.group_widget.layout = QGridLayout()
+            remove_tab_action = QAction("Remove Tab...", self)
+            remove_tab_action.triggered.connect(lambda: self.remove_tab(user=True))
+            right_click_menu.addAction(remove_tab_action)
+
+            # Returning widget at click position
+            tab_bar_widget = QApplication.widgetAt(QCursor.pos())  # fetch tab widget from clickpos
+            self.tab_index = tab_bar_widget.tabAt(e.pos())
+
+            # execute right click menu
+            right_click_menu.exec_(QCursor.pos())
+
+    def add_tab(self, tab_name="", user=False):
+        # TODO: Update the nxs data with new tab
+        nxs_data = nxs.NexusMetaData()
+        if user:
+            tab_name = pyqt_utils.get_user_text(self.parent, header="New Tab",
+                                                label="Enter New Tab Name:")
+            if tab_name[1] and len(tab_name[0]):
+                tab_name = tab_name[0]
+                nxs_data.add_new_tab(tab_name)
+                self.tabs.addTab(NXSTabWidget(self, tab_name), tab_name)
+            else:
+                return
+        else:
+            nxs_data.add_new_tab(tab_name)
+            self.tabs.addTab(NXSTabWidget(self, tab_name))
+
+    def remove_tab(self, tab_name="", user=False):
+        nxs_data = nxs.NexusMetaData()
+        if user:
+            tab_widget = self.tabs.widget(self.tab_index)
+            tab_name = tab_widget.tab_name
+            # ask user if they are sure
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+
+            msg.setWindowFlags(Qt.WindowStaysOnTopHint)
+            msg.setWindowTitle("Delete Tab Confirmation")
+            msg.setText("Are you sure you want to delete %s"%tab_name)
+            msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+
+            if msg.exec_() == QMessageBox.Yes:
+
+                tab_widget = self.tabs.widget(self.tab_index)
+                tab_name = tab_widget.tab_name
+                pyqt_utils.delete_widgets_in_layout(tab_widget)
+                nxs_data.remove_tab(tab_name)
+                self.tabs.removeTab(self.tab_index)
+            else:
+                return
+        else:
+            # TODO: implement delete of tab through referencing
+            self.tabs.addTab(NXSTabWidget(self.parent, tab_name))
 
 
 class NXSTabWidget(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, name):
         super().__init__()
         # Tabs Layout
+        self.tab_name = name
+
+        # Inherited
         self.parent = parent
-        self.setMinimumWidth(self.parent.minimum_width + self.parent.icon_size)
+        self.icon_size = parent.icon_size
+        self.minimum_width = parent.minimum_width
+        self.icon_horizontal_max = parent.icon_horizontal_max
+
+        # Dimensions
+        self.setMinimumWidth(self.minimum_width + self.icon_size)
+
+        # Layout
         self.layout = QVBoxLayout()
+        self.layout.setAlignment(Qt.AlignTop)
         self.setLayout(self.layout)
 
         # Widgets container for scrollable area
         self.widget_container = QWidget()
+        self.widget_container.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        # Widget Container Layout
         self.widget_container.layout = QVBoxLayout()
+        self.widget_container.layout.setAlignment(Qt.AlignTop)
         self.widget_container.setLayout(self.widget_container.layout)
 
         # Defining Scroll Area for tab
         self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
 
         # Setting scroll area to widget container and
         # Adding to scroll area to layout
         self.scroll_area.setWidget(self.widget_container)
+
         self.layout.addWidget(self.scroll_area)
 
-    def add_group(self, group_name):
-        print("adding group: " + group_name + " to layout")
-        self.widget_container.layout.addWidget(NXSGroupWidget(self.parent, group_name))
+    def mousePressEvent(self, e):
+        super().mousePressEvent(e)
+        if e.button() == Qt.RightButton:
+            # right - click menu
+            right_click_menu = QMenu('Add', self)
+
+            # menu actions
+            add_entry_action = QAction("Add new Group...", self)
+            add_entry_action.triggered.connect(lambda: self.add_group())
+            right_click_menu.addAction(add_entry_action)
+            right_click_menu.exec_(QCursor.pos())
+
+    def add_group(self):
+        group_name = pyqt_utils.get_user_text(self, header="New Group", label="Enter New Group Name:")
+        if group_name[1] and len(group_name[0]):  # checking if user OK and entered a name
+            print("adding group: " + group_name[0] + " to tab: " + self.tab_name)
+            self.widget_container.layout.addWidget(NXSGroupWidget(self, self.tab_name, group_name[0]))
 
 
 class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
@@ -381,27 +450,31 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.tab_name = tab_name
         self.group_name = group_name
         self.icon_size = parent.icon_size
+        self.minimum_width = parent.minimum_width
+        self.setMinimumHeight(self.icon_size + self.icon_size * 0.5)
+        self.original_height = self.icon_size + self.icon_size * 0.5
+        self.setMinimumWidth(self.minimum_width)
+        self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         self.setAcceptDrops(True)
 
-        # Layouts
+        # Layout
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
-        self.setMinimumWidth(self.parent.minimum_width)
-        self.setMaximumHeight(33)
-
 
         # Icons Widget
-        self.frame = QFrame()
-        self.frame.setFrameStyle(QFrame.Panel | QFrame.Raised)
-        # self.frame.setLayout(self.layout)
-
-        # Icons Group
         self.icons_widget = QWidget()
+        self.icons_widget.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         self.icons_widget.layout = QGridLayout()
         self.icons_widget.setLayout(self.icons_widget.layout)
 
+        # Scroll Area
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setWidget(self.icons_widget)
+
         # Adding Widgets
-        self.layout.addWidget(self.icons_widget)
+        self.layout.addWidget(self.scroll_area)
 
     def add_entries(self, entries, tab_name, group_name):
         columns = self.parent.icon_horizontal_max
@@ -442,7 +515,6 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
     def add_new_entry(self, filepath=""):
         pass
-
 
 
 class NXSIconWidget(QLabel):
@@ -487,8 +559,7 @@ class NXSIconWidget(QLabel):
 
     def init_aesthetics(self):
         # Setting Size
-        self.setMaximumWidth(self.icon_width)
-        self.setMaximumHeight(self.icon_width)
+        self.setFixedSize(self.icon_width, self.icon_height)
 
         # Setting Style Frame
         self.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)

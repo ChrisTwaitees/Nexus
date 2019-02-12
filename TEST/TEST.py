@@ -6,22 +6,19 @@ from PyQt5 import QtCore as qc
 class TestWindow(pyqt_utils.SimpleWindow):
     def __init__(self):
         super(TestWindow, self).__init__("TEST", style="darkorange")
-        self.test = pyqt_utils.RaisedVBoxWidget()
-        header = pyqt_utils.qw.QPushButton("Name")
-        header
-        self.test.addWidget(header)
-        self.grpBox = pyqt_utils.SimpleCollapsibleWidget("Named GroupBox")
-        self.grpBox.layout = qw.QVBoxLayout()
-        self.grpBox.setLayout(self.grpBox.layout)
-        self.testButton = qw.QPushButton("Test")
-        self.grpBox.layout.addWidget(self.testButton)
+        self.testGroupBox = qw.QGroupBox()
+        self.testButton = qw.QPushButton("TEST")
+        self.testButton.setMinimumSize(500,500)
+        self.scroll = qw.QScrollArea()
+        self.group_layout = qw.QVBoxLayout()
+        self.testGroupBox.setLayout(self.group_layout)
+        self.group_layout.addWidget(self.testButton)
+        self.scroll.setWidget(self.testGroupBox)
+        self.scroll.setMaximumSize(500,500)
+        self.scroll.setWidgetResizable(True)
+        self.layout.addWidget(self.scroll)
 
 
-
-
-
-        self.layout.addWidget(self.test)
-        self.test.addWidget(self.grpBox)
 
 
 

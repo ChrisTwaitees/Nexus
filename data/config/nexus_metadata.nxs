@@ -1,16 +1,6 @@
 {
   "TAB1": {
-    "GROUP1": {
-      "Test_Prop": {
-        "icon_name": "export_icon.png",
-        "icon_location": "",
-        "owner": "User",
-        "local_source_file": "path_to_file",
-        "virtual_file_location": "Perforce_path",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      }
-    },
+    "GROUP1": {},
     "GROUP2": {
       "Test_Prop5": {
         "icon_name": "export_icon.png",
@@ -207,5 +197,6 @@
         "file_extension": ".png"
       }
     }
-  }
+  },
+  "TestTab": {}
 }

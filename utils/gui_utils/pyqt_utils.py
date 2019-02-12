@@ -185,11 +185,11 @@ class SimpleCollapsibleWidget(qw.QGroupBox):
         self.setCheckable(True)
         self.setChecked(True)
 
-        self.original_height = self.maximumHeight()
+        self.original_height = self.minimumHeight()
         self.toggled.connect(lambda: self.toggle_group())
 
     def toggle_group(self):
         if self.isChecked():
-            self.setMaximumHeight(self.original_height)
+            self.setMinimumHeight(self.original_height)
         else:
             self.setFixedHeight(self.fontMetrics().height())

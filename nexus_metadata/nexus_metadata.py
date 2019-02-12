@@ -15,6 +15,12 @@ class NexusMetaData:
         else:
             self.data[tab_name] = {}
             self.write_metadata(self.data)
+            self.data = self.get_metadata()
+
+    def remove_tab(self, tab_name):
+        self.data.pop(tab_name, None)
+        self.write_metadata(self.data)
+        self.data = self.get_metadata()
 
     def add_new_group(self, tab_name, group_name):
         if tab_name not in self.data.keys():
@@ -69,17 +75,6 @@ data_struct = {
             # GROUPS
             "GROUP1":
             {
-                    # ENTRY example
-                    "Test_Prop": {
-                        "icon_name": "export_icon.png",
-                        "icon_location": "",
-                        #TODO fetch owner of file
-                        "owner": "User",
-                        "local_source_file": "path_to_file",
-                        "virtual_file_location": "Perforce_path",
-                        "metadata": "User entered notes here",
-                        "file_extension": ".png"
-                    }
             },
             "GROUP2":
                 {
