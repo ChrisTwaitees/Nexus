@@ -25,7 +25,7 @@ class NXS_UI(QMainWindow):
         self.docs = "https://github.com/ChrisTwaitees/Nexus/blob/master/README.md"
         self.width = 750.0
         self.height = 500.0
-        self.icon_size = 125
+        self.icon_size = 100
 
         # BUILD
         self.create_UI()
