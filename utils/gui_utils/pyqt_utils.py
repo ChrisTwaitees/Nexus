@@ -193,3 +193,25 @@ class SimpleCollapsibleWidget(qw.QGroupBox):
             self.setMinimumHeight(self.original_height)
         else:
             self.setFixedHeight(self.fontMetrics().height())
+
+class HighlightWidget(qw.QWidget):
+    def __init__(self, parent, alpha=125):
+        super(HighlightWidget, self).__init__(parent)
+        self.parent = parent
+        self.opacity = alpha
+        self.highlight_colour = parent.palette().color(qg.QPalette.Highlight)
+        self.highlight_colour.setAlpha(alpha)
+
+        self.palette = qg.QPalette(parent.palette())
+        self.palette.setColor(self.palette.Background, qc.Qt.transparent)
+
+        self.setPalette(self.palette)
+        self.hide()
+
+    def paintEvent(self, event):
+        painter = qg.QPainter()
+        painter.begin(self)
+        painter.setOpacity(self.opacity)
+        painter.setRenderHint(qg.QPainter.Antialiasing)
+        painter.fillRect(event.rect(), qg.QBrush(self.highlight_colour))
+        painter.setPen(qg.QPen(qc.Qt.NoPen))

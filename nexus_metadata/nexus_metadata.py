@@ -241,10 +241,10 @@ data_struct = {
                     # ENTRY example
                     "Test_Prop": {
                         "icon_name": "voronoi.png",
-                        "icon_location": "",
+                        "icon_location": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -255,30 +255,30 @@ data_struct = {
                     # ENTRY example
                     "Test_Prop2": {
                         "icon_name": "voronoi.png",
-                        "icon_location": "",
+                        "icon_location": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop3": {
                         "icon_name": "",
-                        "icon_location": "",
+                        "icon_location": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
                     },
                     "Test_Prop4": {
                         "icon_name": "voronoi.png",
-                        "icon_location": "",
+                        "icon_location": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -289,10 +289,10 @@ data_struct = {
                     # ENTRY example
                     "Test_Prop5": {
                         "icon_name": "voronoi.png",
-                        "icon_location": "",
+                        "icon_location": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -302,7 +302,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -312,7 +312,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -326,7 +326,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -336,7 +336,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -346,7 +346,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -356,7 +356,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -366,7 +366,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -376,7 +376,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -386,7 +386,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -396,7 +396,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -406,7 +406,7 @@ data_struct = {
                         "icon_location": "",
                         # TODO fetch owner of file
                         "owner": "User",
-                        "local_source_file": "path_to_file",
+                        "local_source_file": "G:\Forgotten Snow White\WIP\Hair\hair_02.PNG",
                         "virtual_file_location": "Perforce_path",
                         "metadata": "User entered notes here",
                         "file_extension": ".png"
@@ -417,6 +417,3 @@ data_struct = {
 }
 
 #test = NexusMetaData().write_metadata(data_struct)
-
-
-

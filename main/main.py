@@ -6,17 +6,14 @@ Author: Chris Thwaites
 Github: https://github.com/ChrisTwaitees
 """
 import sys
+import os
 import webbrowser
 from utils import path_utils
 from utils.gui_utils import pyqt_utils
 from nexus_metadata import nexus_metadata as nxs
-from PyQt5.QtCore import (Qt, QMimeData)
-from PyQt5.QtGui import (QFont, QCursor, QDrag, QPixmap, QCursor, QPainter, QPalette, QStandardItem, QStandardItemModel)
-from PyQt5.QtWidgets import (QToolTip,
-                             QPushButton, QApplication, QDesktopWidget, QMainWindow, QWidget,
-                             qApp, QAction, QMessageBox, QMenu, QFileDialog, QStyle, QTabWidget, QVBoxLayout,
-                             QHBoxLayout, QGroupBox, QLineEdit, QGridLayout, QScrollArea, QLabel, QFrame, QTreeView,
-                             QSizePolicy)
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
 class NXS_UI(QMainWindow):
@@ -162,6 +159,7 @@ class NXS_UI(QMainWindow):
 
     def refresh(self):
         self.load_nxs_data()
+        self.tree_browser.refresh()
 
     def center(self):
         qr = self.frameGeometry()
@@ -206,9 +204,6 @@ class NXSTreeBrowserWidget(QWidget):
 
         # NEXUS
         self.nxs_tree = QTreeView()
-        self.nxs_tree.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.nxs_tree.customContextMenuRequested.connect(self.open_menu)
-
         self.nxs_tree.model = QStandardItemModel()
         self.nxs_tree.model.setHorizontalHeaderLabels([self.tr("Nexus Items")])
 
@@ -269,27 +264,9 @@ class NXSTreeBrowserWidget(QWidget):
 
     def refresh(self):
         # TODO implement refresh function to delete all entries and then re-add
-        self.add_items(self.local_tree.model)
-
-    def open_menu(self, position):
-        indexes = self.treeView.selectedIndexes()
-        if len(indexes) > 0:
-
-            level = 0
-            index = indexes[0]
-            while index.parent().isValid():
-                index = index.parent()
-                level += 1
-
-        menu = QMenu()
-        if level == 0:
-            menu.addAction(self.tr("Edit person"))
-        elif level == 1:
-            menu.addAction(self.tr("Edit object/container"))
-        elif level == 2:
-            menu.addAction(self.tr("Edit object"))
-
-        menu.exec_(self.treeView.viewport().mapToGlobal(position))
+        if self.nxs_tree.model.hasChildren():
+            self.nxs_tree.model.removeRows(0, self.nxs_tree.model.rowCount())
+        self.add_items(self.nxs_tree.model)
 
 
 class NXSTabsWidget(QWidget):
@@ -333,12 +310,18 @@ class NXSTabsWidget(QWidget):
             remove_tab_action.triggered.connect(lambda: self.remove_tab(user=True))
             right_click_menu.addAction(remove_tab_action)
 
-            # Returning widget at click position
-            tab_bar_widget = QApplication.widgetAt(QCursor.pos())  # fetch tab widget from clickpos
-            self.tab_index = tab_bar_widget.tabAt(e.pos())
+            rename_tab_action = QAction("Rename Tab...", self)
+            rename_tab_action.triggered.connect(lambda: self.rename_tab(user=True))
+            right_click_menu.addAction(rename_tab_action)
 
-            # execute right click menu
-            right_click_menu.exec_(QCursor.pos())
+            # Returning widget at click position
+            try:
+                tab_bar_widget = QApplication.widgetAt(QCursor.pos())  # fetch tab widget from clickpos
+                self.tab_index = tab_bar_widget.tabAt(e.pos())
+                # execute right click menu
+                right_click_menu.exec_(QCursor.pos())
+            except:
+                pass
 
     def add_tab(self, tab_name="", user=False):
         # TODO: Update the nxs data with new tab
@@ -350,6 +333,7 @@ class NXSTabsWidget(QWidget):
                 tab_name = tab_name[0]
                 nxs_data.add_new_tab(tab_name)
                 self.tabs.addTab(NXSTabWidget(self, tab_name), tab_name)
+                self.parent.tree_browser.refresh()
             else:
                 return
         else:
@@ -367,21 +351,25 @@ class NXSTabsWidget(QWidget):
 
             msg.setWindowFlags(Qt.WindowStaysOnTopHint)
             msg.setWindowTitle("Delete Tab Confirmation")
-            msg.setText("Are you sure you want to delete %s"%tab_name)
+            msg.setText("Are you sure you want to delete: %s?" % tab_name)
             msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
 
             if msg.exec_() == QMessageBox.Yes:
-
                 tab_widget = self.tabs.widget(self.tab_index)
                 tab_name = tab_widget.tab_name
                 pyqt_utils.delete_widgets_in_layout(tab_widget)
                 nxs_data.remove_tab(tab_name)
                 self.tabs.removeTab(self.tab_index)
+                self.parent.refresh()
             else:
                 return
         else:
             # TODO: implement delete of tab through referencing
             self.tabs.addTab(NXSTabWidget(self.parent, tab_name))
+
+    def rename_tab(self, tab_name="", user=False):
+        # TODO: implement renaming tab function
+        pass
 
 
 class NXSTabWidget(QWidget):
@@ -435,10 +423,15 @@ class NXSTabWidget(QWidget):
             right_click_menu.exec_(QCursor.pos())
 
     def add_group(self):
+        nxs_data = nxs.NexusMetaData()
         group_name = pyqt_utils.get_user_text(self, header="New Group", label="Enter New Group Name:")
         if group_name[1] and len(group_name[0]):  # checking if user OK and entered a name
+            nxs_data.add_new_group(tab_name=self.tab_name, group_name=group_name[0])
             print("adding group: " + group_name[0] + " to tab: " + self.tab_name)
             self.widget_container.layout.addWidget(NXSGroupWidget(self, self.tab_name, group_name[0]))
+            self.parent.parent.tree_browser.refresh()
+        else:
+            return
 
 
 class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
@@ -451,6 +444,12 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.group_name = group_name
         self.icon_size = parent.icon_size
         self.minimum_width = parent.minimum_width
+
+        self.construction()
+        self.create_layout()
+        self.create_widgets()
+
+    def construction(self):
         self.setMinimumHeight(self.icon_size + self.icon_size * 0.5)
         self.original_height = self.icon_size + self.icon_size * 0.5
         self.setMinimumWidth(self.minimum_width)
@@ -458,12 +457,15 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         self.setAcceptDrops(True)
 
+    def create_layout(self):
         # Layout
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
+    def create_widgets(self):
         # Icons Widget
         self.icons_widget = QWidget()
+        self.icons_widget.setAcceptDrops(True)
         self.icons_widget.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         self.icons_widget.layout = QGridLayout()
         self.icons_widget.setLayout(self.icons_widget.layout)
@@ -475,6 +477,9 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
         # Adding Widgets
         self.layout.addWidget(self.scroll_area)
+
+        # Highlight Widget
+        self.highlight = pyqt_utils.HighlightWidget(self, alpha=125)
 
     def add_entries(self, entries, tab_name, group_name):
         columns = self.parent.icon_horizontal_max
@@ -490,6 +495,8 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
             # TODO implement build from metadata
             browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
             self.icons_widget.layout.addWidget(browser_icon, *position)
+
+    # MOUSE CLICK HANDLERS
 
     def mousePressEvent(self, e):
         super().mousePressEvent(e)
@@ -514,7 +521,37 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.add_new_entry(filepath)
 
     def add_new_entry(self, filepath=""):
+        # TODO: Add entry to entry dat
         pass
+
+    # DRAG AND DROP
+    def dragEnterEvent(self, e):
+        if e.mimeData().hasUrls:
+            e.accept()
+            self.highlight.show()
+            print("EnterEvent")
+        else:
+            print("EnterEvent")
+            e.ignore()
+
+    def dragLeaveEvent(self, e):
+        e.accept()
+        self.highlight.hide()
+
+    def dropEvent(self, e):
+        if e.mimeData().hasUrls:
+            e.setDropAction(Qt.CopyAction)
+            e.accept()
+            for url in e.mimeData().urls():
+                path = str(url.toLocalFile())
+                print("Adding %s" % path)
+            self.highlight.hide()
+        else:
+            e.ignore()
+
+    def resizeEvent(self, e):
+        self.highlight.resize(e.size())
+        e.accept()
 
 
 class NXSIconWidget(QLabel):
@@ -530,12 +567,13 @@ class NXSIconWidget(QLabel):
         self.icon_height = parent.icon_size
 
         # inits
-        self.init_metadata()
+        self.last = None
+        self.set_metadata()
         self.set_toolTip()
-        self.init_aesthetics()
-        self.init_icon()
+        self.set_aesthetics()
+        self.create_icon()
 
-    def init_metadata(self):
+    def set_metadata(self):
         nxs_data = nxs.NexusMetaData().get_metadata()
         if self.tab_name in nxs_data.keys() and self.group_name in nxs_data[self.tab_name].keys():
             entry_dict = nxs_data[self.tab_name][self.group_name][self.entry_name]
@@ -557,7 +595,7 @@ class NXSIconWidget(QLabel):
                                                                                        self.file_extension)
         self.setToolTip(toolTip)
 
-    def init_aesthetics(self):
+    def set_aesthetics(self):
         # Setting Size
         self.setFixedSize(self.icon_width, self.icon_height)
 
@@ -575,7 +613,7 @@ class NXSIconWidget(QLabel):
                       "border-radius: 4px;}"
         self.setStyleSheet(self.default_style_sheet)
 
-    def init_icon(self):
+    def create_icon(self):
         # Setting default icon pixmap
         self.default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
         #TODO establish better method for protecting original icon, QPainter seems to override
@@ -588,7 +626,6 @@ class NXSIconWidget(QLabel):
         self.highlight_pixmap.fill(self.highlight_colour)
 
         # Using QPainter in Color Dodge to create overlayed highlight of icon
-        # TODO implent refresh function in order to update icons when replaced
         self.highlight_painter = QPainter()
         self.highlight_painter.begin(self.default_icon_pixmap)
         self.highlight_painter.setCompositionMode(QPainter.CompositionMode_ColorDodge)
@@ -596,13 +633,36 @@ class NXSIconWidget(QLabel):
         self.highlight_painter.drawPixmap(0,0,self.highlight_pixmap)
         self.highlight_painter.end()
 
-    # MOUSE PRESS EVENTS
+    # MOUSE CLICK HANDLING
+
     def mousePressEvent(self, e):
-        super().mousePressEvent(e)
         if e.button() == Qt.LeftButton:
+            self.last = "Left Click"
             self.drag_start_position = e.pos()
-            print('LeftMousePressed')
         if e.button() == Qt.RightButton:
+            self.last = "Right Click"
+            self.drag_start_position = e.pos()
+
+    def mouseReleaseEvent(self, e):
+        if self.last == "Left Click":
+            QTimer.singleShot(QApplication.instance().doubleClickInterval(),
+                                 self.single_left_click_action)
+        elif self.last == "Right Click":
+            self.single_right_click_action()
+        else:
+            pass
+
+    def mouseDoubleClickEvent(self, e):
+        if e.button() == Qt.LeftButton:
+            self.last = "Double Left Click"
+            print(self.last)
+
+    def single_left_click_action(self):
+        if self.last == "Left Click":
+            print(self.last)
+
+    def single_right_click_action(self):
+        if self.last == "Right Click":
             # right - click menu
             right_click_menu = QMenu('Add', self)
 
@@ -612,7 +672,7 @@ class NXSIconWidget(QLabel):
             change_icon_screengrab = QAction("Use the snipping tool", self)
             change_icon_screengrab.triggered.connect(lambda: self.take_screenshot())
             change_icon_file = QAction("Choose file from directory...")
-            change_icon_file.triggered.connect(lambda: self.open_file_browser(start_dir=path_utils.get_icon_path()))
+            change_icon_file.triggered.connect(lambda: self.open_file_browser(start_dir=self.icon_location))
             change_icon_menu.addAction(change_icon_screengrab)
             change_icon_menu.addAction(change_icon_file)
             right_click_menu.addMenu(change_icon_menu)
@@ -624,29 +684,12 @@ class NXSIconWidget(QLabel):
 
             # Go to Local File Location
             open_file_browser = QAction('Open Local File Directory', self)
-            open_file_browser.triggered.connect(lambda: self.open_file_browser(start_dir=""))
+            open_file_browser.triggered.connect(lambda: self.open_file_browser(start_dir=self.local_source_file))
             right_click_menu.addAction(open_file_browser)
-
-            # Go to Perforce Virtual Location
-            open_perforce_location = QAction('Open Perforce Virtual Location', self)
-            open_perforce_location.triggered.connect(lambda: self.open_file_browser(start_dir=""))
-            right_click_menu.addAction(open_perforce_location)
-
-            # Go to Icon Location
-            open_perforce_location = QAction('Open Icon Source Directory', self)
-            open_perforce_location.triggered.connect(lambda: self.open_file_browser(start_dir=path_utils.get_icon_path()))
-            right_click_menu.addAction(open_perforce_location)
-
-
-
-
-
 
             right_click_menu.exec_(QCursor.pos())
 
-            print('RightMousePressed')
-
-    # CURSOR HOVERS
+    # MOUSE HOVERS
     def enterEvent(self, e):
         self.setStyleSheet(self.highlighted_style_sheet)
         self.setPixmap(self.default_icon_pixmap)
@@ -663,15 +706,7 @@ class NXSIconWidget(QLabel):
             return
         drag = QDrag(self)
 
-
-        # TODO handle QMimeData creation depending on datatype
-        # csvData = QByteArray()
-        # mimedata = QMimeData()
-        #
-        # with open(self.local_source_file) as source:
-        #     data = source.read()
-        # mimedata.setData(self.local_source_file, csvData)
-
+        # TODO: MimeData handler depending on icon's metadata
         mimedata = QMimeData()
         mimedata.setText(self.local_source_file)
 
@@ -686,7 +721,6 @@ class NXSIconWidget(QLabel):
         drag.exec_(Qt.CopyAction | Qt.MoveAction)
 
     # DRAG AND DROP - ENTER
-    # provides signal as dragging action enters it
     def dragEnterEvent(self, e):
         self.setStyleSheet(self.highlighted_style_sheet)
         self.setPixmap(self.default_icon_pixmap)
@@ -697,9 +731,11 @@ class NXSIconWidget(QLabel):
         self.setStyleSheet(self.default_style_sheet)
         self.setPixmap(self.protected_default_icon_pixmap)
 
-    # triggers on drop
+    # DRAG AND DROP - DROP
     def dropEvent(self, e):
         print("dropEventTriggered" * 40)
+
+    # UTILITIES
 
     def take_screenshot(self):
         # TODO implement legitimate screenshot method
@@ -716,7 +752,10 @@ class NXSIconWidget(QLabel):
             return icon_pixmap.scaled(w, h, Qt.KeepAspectRatio)
 
     def open_file_browser(self, start_dir):
-        QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
+        if os.path.exists(start_dir):
+            QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))
+        else:
+            print("path to: %s , does not exist please look at nxs data" % start_dir)
 
     def refresh_icon(self, icon_name):
         # TODO implement more robust refresh handling

@@ -1,34 +1,58 @@
-from utils.gui_utils import pyqt_utils
+# !/usr/bin/env python
+# -*- coding:utf-8 -*-
 
-from PyQt5 import QtWidgets as qw
-from PyQt5 import QtGui as qg
-from PyQt5 import QtCore as qc
-class TestWindow(pyqt_utils.SimpleWindow):
-    def __init__(self):
-        super(TestWindow, self).__init__("TEST", style="darkorange")
-        self.testGroupBox = qw.QGroupBox()
-        self.testButton = qw.QPushButton("TEST")
-        self.testButton.setMinimumSize(500,500)
-        self.scroll = qw.QScrollArea()
-        self.group_layout = qw.QVBoxLayout()
-        self.testGroupBox.setLayout(self.group_layout)
-        self.group_layout.addWidget(self.testButton)
-        self.scroll.setWidget(self.testGroupBox)
-        self.scroll.setMaximumSize(500,500)
-        self.scroll.setWidgetResizable(True)
-        self.layout.addWidget(self.scroll)
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
+class overlay(QWidget):
+    def __init__(self, parent=None):
+        super(overlay, self).__init__(parent)
+
+        palette = QPalette(self.palette())
+        palette.setColor(palette.Background, Qt.transparent)
+
+        self.setPalette(palette)
+
+    def paintEvent(self, event):
+        painter = QPainter()
+        painter.begin(self)
+        painter.setRenderHint(QPainter.Antialiasing)
+        painter.fillRect(event.rect(), QBrush(QColor(255, 255, 255, 127)))
+        painter.drawLine(self.width() / 8, self.height() / 8, 7 * self.width() / 8, 7 * self.height() / 8)
+        painter.drawLine(self.width() / 8, 7 * self.height() / 8, 7 * self.width() / 8, self.height() / 8)
+        painter.setPen(QPen(Qt.NoPen))
 
 
+class windowOverlay(QWidget):
+    def __init__(self, parent=None):
+        super(windowOverlay, self).__init__(parent)
+
+        self.editor = QTextEdit()
+        self.editor.setPlainText("OVERLAY" * 100)
+
+        self.button = QPushButton("Toggle Overlay")
+
+        self.verticalLayout = QVBoxLayout(self)
+        self.verticalLayout.addWidget(self.editor)
+        self.verticalLayout.addWidget(self.button)
+
+        self.overlay = overlay(self.editor)
+        self.overlay.hide()
+
+        self.button.clicked.connect(
+            lambda: self.overlay.setVisible(False) if self.overlay.isVisible() else self.overlay.setVisible(True))
+
+    def resizeEvent(self, event):
+        self.overlay.resize(event.size())
+        event.accept()
 
 
-def main():
+if __name__ == "__main__":
+    import sys
 
-    app = pyqt_utils.qw.QApplication(pyqt_utils.sys.argv)
-    main_window = TestWindow()
-    main_window.show()
-    pyqt_utils.sys.exit(app.exec_())
-
-main()
-
+    app = QApplication(sys.argv)
+    main = windowOverlay()
+    main.show()
+    sys.exit(app.exec_())
