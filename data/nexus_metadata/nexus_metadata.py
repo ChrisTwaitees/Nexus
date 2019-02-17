@@ -75,21 +75,18 @@ class NexusMetaData:
     def get_tab(self, tab_name):
         data = self.get_metadata()
         if self.check_exists(tab_name=tab_name):
-            print("getting tab: %s" % tab_name)
             return data[tab_name]
         else:
             raise AttributeError("Cannot find tab: %s in NXS" % tab_name)
 
     def get_group(self, tab_name, group_name):
         if self.check_exists(tab_name=tab_name, group_name=group_name):
-            print("getting group: %s" % group_name)
             return self.get_tab(tab_name)[group_name]
         else:
             raise AttributeError("Cannot find group: %s in NXS" % group_name)
 
     def get_entry(self, tab_name, group_name, entry_name):
         if self.check_exists(tab_name=tab_name, group_name=group_name, entry_name=entry_name):
-            print("getting entry: %s" % entry_name)
             return self.get_group(tab_name, group_name)[entry_name]
         else:
             raise AttributeError("Cannot find entry: %s in NXS" % entry_name)
@@ -105,17 +102,11 @@ class NexusMetaData:
     def check_exists(self, tab_name="", group_name="", entry_name=""):
         data = self.get_metadata()
         if len(tab_name):
-            print("Checking tab %s" %tab_name)
             if tab_name in data.keys():
-                print("Tab Exists %s" % tab_name)
                 if len(group_name):
-                    print("Checing Group %s" % group_name)
                     if group_name in data[tab_name].keys():
-                        print("Group exists %s" % group_name)
                         if len(entry_name):
-                            print("Checking entry %s" % entry_name)
                             if entry_name in data[tab_name][group_name].keys():
-                                print("Entry Exists %s" % entry_name)
                                 return True
                             else:
                                 raise AttributeError("Entry: %s idoes not exist in this group,\n "
@@ -173,4 +164,4 @@ data_struct = {
         },
 }
 
-test = NexusMetaData().write_metadata(data_struct)
+#test = NexusMetaData().write_metadata(data_struct)

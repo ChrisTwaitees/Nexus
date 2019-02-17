@@ -13,9 +13,61 @@
         "metadata": "User entered notes here",
         "file_extension": ".png"
       },
+      "Test_Prop8": {
+        "icon": "export_icon.png",
+        "source_file": "path_to_file",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "Test_Prop9": {
+        "icon": "export_icon.png",
+        "source_file": "path_to_file",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "Test_Prop10": {
+        "icon": "export_icon.png",
+        "source_file": "path_to_file",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "Test_Prop11": {
+        "icon": "export_icon.png",
+        "source_file": "path_to_file",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "Test_Prop12": {
+        "icon": "export_icon.png",
+        "source_file": "path_to_file",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
       "folder": {
         "icon": "export_icon.png",
         "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\folder.png",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "refresh_icon": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\refresh_icon.png",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      }
+    }
+  },
+  "asdff": {
+    "sadfsdf": {
+      "python": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\python.png",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
+      },
+      "text": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\text.png",
         "metadata": "User entered notes here",
         "file_extension": ".png"
       }

@@ -423,6 +423,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.tab_name = tab_name
         self.group_name = group_name
         self.icon_size = parent.icon_size
+        self.icon_spacing = 10
         self.minimum_width = parent.minimum_width
 
         # Build
@@ -449,6 +450,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.icons_widget.setAcceptDrops(True)
         self.icons_widget.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         self.icons_widget.layout = QGridLayout()
+        self.icons_widget.layout.setSpacing(self.icon_spacing)
         self.icons_widget.setLayout(self.icons_widget.layout)
 
         # Scroll Area
@@ -461,6 +463,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
         # Highlight Widget
         self.highlight = pyqt_utils.HighlightWidget(self, alpha=125)
+        self.icon_objects = []
 
     # MOUSE CLICK HANDLERS
 
@@ -510,33 +513,41 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
     def resizeEvent(self, e):
         self.highlight.resize(e.size())
+        self.update_layout()
         e.accept()
 
     # FUNCTIONS
 
     def add_entries(self, entries, tab_name, group_name):
-        columns = self.parent.icon_horizontal_max
-        if len(entries) != 0:
-            if len(entries) % columns != 0:
-                rows = int(len(entries) / self.parent.icon_horizontal_max) + 1
-            else:
-                rows = int(len(entries) / self.parent.icon_horizontal_max)
-        else:
-            return
-        positions = [(i, j) for i in range(rows) for j in range(columns)]
-        for position, name in zip(positions, entries):
-            browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
-            self.icons_widget.layout.addWidget(browser_icon, *position)
+        if len(entries):
+            for entry in entries:
+                position = self.get_empty_position()
+                browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=entry)
+                self.icons_widget.layout.addWidget(browser_icon, *position)
 
     def add_new_entry(self, file_path=""):
         entry_name = path_utils.get_file_name(file_path)
         nxs_data = nxs.NexusMetaData()
         nxs_data.add_new_entry(self.tab_name, self.group_name, file_path)
-        # new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
-        #                           entry_name=entry_name)
-        # self.icons_widget.addWidget(new_icon)
+
+        new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
+                                  entry_name=entry_name)
+        empty_position = self.get_empty_position()
+        self.icons_widget.layout.addWidget(new_icon, *empty_position)
         # TODO: implement layout correcting function
         pass
+
+    def get_empty_position(self):
+        rows = self.icons_widget.layout.rowCount()
+
+        current_x = self.width()
+        max_columns = current_x//(self.icon_size + (self.icon_spacing*2))
+
+        for r in range(rows):
+            for c in range(max_columns):
+                if self.icons_widget.layout.itemAtPosition(r, c) is None:
+                    return r, c
+        return (r+1), 0
 
     def right_click_add_entry(self, start_dir=""):
         filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
@@ -564,8 +575,33 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
             return
 
     def update_layout(self):
-        # TODO: Implement updating of row column layout according to icon size and screenspace
-        pass
+        #get all widgets
+        icon_widgets = []
+        rows = self.icons_widget.layout.rowCount()
+        columns = self.icons_widget.layout.columnCount()
+
+        # check if necessary depending on width
+        current_x = self.width()
+        max_columns = current_x//(self.icon_size + (self.icon_spacing*2))
+
+        # collect widget pointers (order matters!)
+        if columns < max_columns or columns > max_columns:
+            for r in range(rows):
+                for c in range(columns):
+                    widget = self.icons_widget.layout.itemAtPosition(r, c)
+                    if widget:
+                        index = self.icons_widget.layout.indexOf(widget.widget())
+                        icon_widget = self.icons_widget.layout.takeAt(index)
+                        icon_widgets.append(icon_widget)
+
+            # rebuild layout
+            column = 0
+            row = 0
+            for icon in icon_widgets:
+                self.icons_widget.layout.addWidget(icon.widget(), row, column % max_columns)
+                column += 1
+                if column % max_columns == 0:
+                    row += 1
 
 
 class NXSIconWidget(QLabel):
