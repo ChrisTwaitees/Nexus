@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py" line="158" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f7f6f889-1363-4c0f-8a0c-068940149f4c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/icons/folder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/icons/python.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/icons/text.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEST/TEST.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEST/__init__.py" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Nexus" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.36202186">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2652">
+                  <caret line="157" selection-start-line="157" selection-end-line="157" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/main/main.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="538">
+                  <caret line="556" column="45" selection-start-line="556" selection-start-column="45" selection-end-line="556" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#0#110#1" />
+                    <element signature="e#383#6311#0" />
+                    <element signature="e#411#900#0" />
+                    <element signature="e#935#1151#0" />
+                    <element signature="e#1192#3819#0" />
+                    <element signature="e#1733#1766#0" />
+                    <element signature="e#2908#2918#0" />
+                    <element signature="e#3859#4480#0" />
+                    <element signature="e#3859#3868#0" />
+                    <element signature="e#4519#5441#0" />
+                    <element signature="e#4807#5376#0" />
+                    <element signature="e#4851#5376#0" />
+                    <element signature="e#5039#5376#0" />
+                    <element signature="e#5474#5530#0" />
+                    <element signature="e#5562#5704#0" />
+                    <element signature="e#5750#5858#0" />
+                    <element signature="e#5912#6065#0" />
+                    <element signature="e#6112#6225#0" />
+                    <element signature="e#6271#6311#0" />
+                    <element signature="e#6355#9470#0" />
+                    <element signature="e#6383#6553#0" />
+                    <element signature="e#6593#7159#0" />
+                    <element signature="e#7206#8179#0" />
+                    <element signature="e#8213#8615#0" />
+                    <element signature="e#8248#8417#0" />
+                    <element signature="e#8444#8615#0" />
+                    <element signature="e#8658#9198#0" />
+                    <element signature="e#8749#9198#0" />
+                    <element signature="e#8793#9198#0" />
+                    <element signature="e#8937#9198#0" />
+                    <element signature="e#9108#9198#0" />
+                    <element signature="e#9231#9470#0" />
+                    <element signature="e#9507#13318#0" />
+                    <element signature="e#9543#10148#0" />
+                    <element signature="e#10192#11348#0" />
+                    <element signature="e#10272#11348#0" />
+                    <element signature="e#11060#11307#0" />
+                    <element signature="e#11406#12074#0" />
+                    <element signature="e#11515#11958#0" />
+                    <element signature="e#11724#11917#0" />
+                    <element signature="e#11985#12074#0" />
+                    <element signature="e#12135#13205#0" />
+                    <element signature="e#12195#13061#0" />
+                    <element signature="e#12728#13020#0" />
+                    <element signature="e#13088#13205#0" />
+                    <element signature="e#13266#13318#0" />
+                    <element signature="e#13354#15708#0" />
+                    <element signature="e#13396#14625#0" />
+                    <element signature="e#14431#14476#0" />
+                    <element signature="e#14669#15092#0" />
+                    <element signature="e#14749#15092#0" />
+                    <element signature="e#15127#15708#0" />
+                    <element signature="e#15364#15675#0" />
+                    <element signature="e#19052#19255#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="266">
+                  <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/utils/path_utils.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="765">
+                  <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1258">
+                  <caret line="98" selection-start-line="98" selection-end-line="98" />
+                  <folding>
+                    <element signature="e#0#139#1" />
+                    <element signature="e#378#1168#0" />
+                    <element signature="e#390#1136#0" />
+                    <element signature="e#1212#1319#0" />
+                    <element signature="e#1374#1439#0" />
+                    <element signature="e#1493#1557#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/data/config/nexus_metadata.nxs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/main/main.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3230">
+                  <caret line="614" selection-start-line="614" selection-end-line="616" />
+                  <folding>
+                    <element signature="e#0#110#1" />
+                    <element signature="e#383#6311#0" />
+                    <element signature="e#411#900#0" />
+                    <element signature="e#935#1151#0" />
+                    <element signature="e#1192#3819#0" />
+                    <element signature="e#1733#1766#0" />
+                    <element signature="e#2908#2918#0" />
+                    <element signature="e#3859#4480#0" />
+                    <element signature="e#3859#3868#0" />
+                    <element signature="e#4519#5441#0" />
+                    <element signature="e#4807#5376#0" />
+                    <element signature="e#4851#5376#0" />
+                    <element signature="e#5039#5376#0" />
+                    <element signature="e#5474#5530#0" />
+                    <element signature="e#5562#5704#0" />
+                    <element signature="e#5750#5858#0" />
+                    <element signature="e#5912#6065#0" />
+                    <element signature="e#6112#6225#0" />
+                    <element signature="e#6271#6311#0" />
+                    <element signature="e#6355#9470#0" />
+                    <element signature="e#6383#6553#0" />
+                    <element signature="e#6593#7159#0" />
+                    <element signature="e#7206#8179#0" />
+                    <element signature="e#8213#8615#0" />
+                    <element signature="e#8248#8417#0" />
+                    <element signature="e#8444#8615#0" />
+                    <element signature="e#8658#9198#0" />
+                    <element signature="e#8749#9198#0" />
+                    <element signature="e#8793#9198#0" />
+                    <element signature="e#8937#9198#0" />
+                    <element signature="e#9108#9198#0" />
+                    <element signature="e#9231#9470#0" />
+                    <element signature="e#9507#13318#0" />
+                    <element signature="e#9543#10148#0" />
+                    <element signature="e#10192#11348#0" />
+                    <element signature="e#10272#11348#0" />
+                    <element signature="e#11060#11307#0" />
+                    <element signature="e#11406#12074#0" />
+                    <element signature="e#11515#11958#0" />
+                    <element signature="e#11724#11917#0" />
+                    <element signature="e#11985#12074#0" />
+                    <element signature="e#12135#13205#0" />
+                    <element signature="e#12195#13061#0" />
+                    <element signature="e#12728#13020#0" />
+                    <element signature="e#13088#13205#0" />
+                    <element signature="e#13266#13318#0" />
+                    <element signature="e#13354#15708#0" />
+                    <element signature="e#13396#14625#0" />
+                    <element signature="e#14431#14476#0" />
+                    <element signature="e#14669#15092#0" />
+                    <element signature="e#14749#15092#0" />
+                    <element signature="e#15127#15708#0" />
+                    <element signature="e#15364#15675#0" />
+                    <element signature="e#19052#19255#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>skat</find>
+      <find>setStyle</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="adding_groups" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/content_browser_ utils.py" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/main/paths_utils.py" />
+        <option value="$PROJECT_DIR$/main/__init__.py" />
+        <option value="$PROJECT_DIR$/nexus_metadata.py" />
+        <option value="$PROJECT_DIR$/qt_utils/qt_utils.py" />
+        <option value="$PROJECT_DIR$/main/utils.py" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/data/config/nexus_metadata.nxs" />
+        <option value="$PROJECT_DIR$/utils/qt_utils.py" />
+        <option value="$PROJECT_DIR$/utils/gui_utils/style/dark.css" />
+        <option value="$PROJECT_DIR$/utils/gui_utils/style/darcula.css" />
+        <option value="$PROJECT_DIR$/utils/gui_utils/style/darkorange.css" />
+        <option value="$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py" />
+        <option value="$PROJECT_DIR$/utils/path_utils.py" />
+        <option value="$PROJECT_DIR$/main/main.py" />
+        <option value="$PROJECT_DIR$/nexus_metadata/nexus_metadata.py" />
+        <option value="$PROJECT_DIR$/TEST/TEST.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="icons" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="nexus_metadata" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="TEST" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="gui_utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="gui_utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="style" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Chris Thwaites\PycharmProjects\Nexus\utils\gui_utils" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="TEST" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Nexus" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TEST" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TEST/TEST.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Nexus" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="nexus_metadata" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Nexus" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/nexus_metadata" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/nexus_metadata/nexus_metadata.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="path_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Nexus" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/path_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="qt_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Nexus" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\Chris Thwaites\PycharmProjects\Nexus\utils\gui_utils\pyqt_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.path_utils" />
+        <item itemvalue="Python.TEST" />
+        <item itemvalue="Python.nexus_metadata" />
+        <item itemvalue="Python.qt_utils" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7f6f889-1363-4c0f-8a0c-068940149f4c" name="Default Changelist" comment="" />
+      <created>1547845104425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1547845104425</updated>
+    </task>
+    <task id="LOCAL-00001" summary="basic drag and drop functionality&#10;data class for metadata started&#10;TODO: build group functionality and tree browser&#10;TODO: collapsible groups in icons and then&#10;registering application at drop proving challenging">
+      <created>1548032239495</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1548032239495</updated>
+    </task>
+    <task id="LOCAL-00002" summary="basic drag and drop functionality&#10;data class for metadata started&#10;TODO: build group functionality and tree browser&#10;TODO: collapsible groups in icons and then&#10;registering application at drop proving challenging">
+      <created>1548185899501</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548185899501</updated>
+    </task>
+    <task id="LOCAL-00003" summary="implemented tree view&#10;reading metadata loop simplified&#10;&#10;TODO: Groups! &#10;TODO: building from metadata">
+      <created>1548200828176</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1548200828176</updated>
+    </task>
+    <task id="LOCAL-00004" summary="implemented tree view&#10;reading metadata loop simplified&#10;&#10;TODO: Groups! &#10;TODO: building from metadata">
+      <created>1549145967323</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1549145967323</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added css styling and abstracting basic windows">
+      <created>1549914131820</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549914131820</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding Adding and deletion of tabs">
+      <created>1549930856465</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1549930856465</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adding more drag and drop functionality&#10;Hooking in nxs data adding of groups and deleting of tabs&#10;Fixed some event bugs&#10;TODO: Remove Group&#10;TODO: Add New Entry from right click or drag and drop&#10;TODO: QMimeData parser">
+      <created>1550017870132</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1550017870132</updated>
+    </task>
+    <task id="LOCAL-00008" summary="shrinking default icon size">
+      <created>1550018313673</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1550018313673</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Getting and checking of NXS data&#10;adding icons&#10;simplifying config data entries&#10;adding entry path utils">
+      <created>1550415372041</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1550415372041</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.496208" visible="true" weight="0.2217484" />
+      <window_info id="Structure" order="1" sideWeight="0.5016251" side_tool="true" weight="0.19189766" />
+      <window_info id="Favorites" order="2" sideWeight="0.503792" side_tool="true" weight="0.19189766" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.08125677" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.19501625" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.2751896" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Packages" order="4" />
+    </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="basic drag and drop functionality&#10;data class for metadata started&#10;TODO: build group functionality and tree browser&#10;TODO: collapsible groups in icons and then&#10;registering application at drop proving challenging" />
+    <MESSAGE value="implemented tree view&#10;reading metadata loop simplified&#10;&#10;TODO: Groups! &#10;TODO: building from metadata" />
+    <MESSAGE value="Added css styling and abstracting basic windows" />
+    <MESSAGE value="Adding Adding and deletion of tabs" />
+    <MESSAGE value="Adding more drag and drop functionality&#10;Hooking in nxs data adding of groups and deleting of tabs&#10;Fixed some event bugs&#10;TODO: Remove Group&#10;TODO: Add New Entry from right click or drag and drop&#10;TODO: QMimeData parser" />
+    <MESSAGE value="shrinking default icon size" />
+    <MESSAGE value="Getting and checking of NXS data&#10;adding icons&#10;simplifying config data entries&#10;adding entry path utils" />
+    <option name="LAST_COMMIT_MESSAGE" value="Getting and checking of NXS data&#10;adding icons&#10;simplifying config data entries&#10;adding entry path utils" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-1782116726/PyQt5/QtWidgets/QMainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="173" column="8" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/gui_utils/style/darcula.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="760" column="1" selection-start-line="760" selection-start-column="1" selection-end-line="760" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/gui_utils/style/dark.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/gui_utils/style/darkorange.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="423" column="38" lean-forward="true" selection-start-line="423" selection-start-column="38" selection-end-line="423" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://G:/Forgotten Snow White/WIP/Hair/hair_00.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/icons/refresh_icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/path_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1258">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#0#139#1" />
+            <element signature="e#378#1168#0" />
+            <element signature="e#390#1136#0" />
+            <element signature="e#1212#1319#0" />
+            <element signature="e#1374#1439#0" />
+            <element signature="e#1493#1557#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/config/nexus_metadata.nxs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3230">
+          <caret line="614" selection-start-line="614" selection-end-line="616" />
+          <folding>
+            <element signature="e#0#110#1" />
+            <element signature="e#383#6311#0" />
+            <element signature="e#411#900#0" />
+            <element signature="e#935#1151#0" />
+            <element signature="e#1192#3819#0" />
+            <element signature="e#1733#1766#0" />
+            <element signature="e#2908#2918#0" />
+            <element signature="e#3859#4480#0" />
+            <element signature="e#3859#3868#0" />
+            <element signature="e#4519#5441#0" />
+            <element signature="e#4807#5376#0" />
+            <element signature="e#4851#5376#0" />
+            <element signature="e#5039#5376#0" />
+            <element signature="e#5474#5530#0" />
+            <element signature="e#5562#5704#0" />
+            <element signature="e#5750#5858#0" />
+            <element signature="e#5912#6065#0" />
+            <element signature="e#6112#6225#0" />
+            <element signature="e#6271#6311#0" />
+            <element signature="e#6355#9470#0" />
+            <element signature="e#6383#6553#0" />
+            <element signature="e#6593#7159#0" />
+            <element signature="e#7206#8179#0" />
+            <element signature="e#8213#8615#0" />
+            <element signature="e#8248#8417#0" />
+            <element signature="e#8444#8615#0" />
+            <element signature="e#8658#9198#0" />
+            <element signature="e#8749#9198#0" />
+            <element signature="e#8793#9198#0" />
+            <element signature="e#8937#9198#0" />
+            <element signature="e#9108#9198#0" />
+            <element signature="e#9231#9470#0" />
+            <element signature="e#9507#13318#0" />
+            <element signature="e#9543#10148#0" />
+            <element signature="e#10192#11348#0" />
+            <element signature="e#10272#11348#0" />
+            <element signature="e#11060#11307#0" />
+            <element signature="e#11406#12074#0" />
+            <element signature="e#11515#11958#0" />
+            <element signature="e#11724#11917#0" />
+            <element signature="e#11985#12074#0" />
+            <element signature="e#12135#13205#0" />
+            <element signature="e#12195#13061#0" />
+            <element signature="e#12728#13020#0" />
+            <element signature="e#13088#13205#0" />
+            <element signature="e#13266#13318#0" />
+            <element signature="e#13354#15708#0" />
+            <element signature="e#13396#14625#0" />
+            <element signature="e#14431#14476#0" />
+            <element signature="e#14669#15092#0" />
+            <element signature="e#14749#15092#0" />
+            <element signature="e#15127#15708#0" />
+            <element signature="e#15364#15675#0" />
+            <element signature="e#19052#19255#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
