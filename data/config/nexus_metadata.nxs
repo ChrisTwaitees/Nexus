@@ -12,6 +12,12 @@
         "source_file": "path_to_file",
         "metadata": "User entered notes here",
         "file_extension": ".png"
+      },
+      "folder": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\folder.png",
+        "metadata": "User entered notes here",
+        "file_extension": ".png"
       }
     }
   }

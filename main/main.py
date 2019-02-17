@@ -471,16 +471,17 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
             right_click_menu = QMenu('Add', self)
 
             # menu actions
-            add_entry_menu = QMenu("Add New Entry...")
-            add_entry_action = QAction("Open File Browser", self)
+            # add new entry action
+            add_entry_action = QAction("Add New Entry...", self)
             add_entry_action.triggered.connect(lambda: self.right_click_add_entry(start_dir=path_utils.get_icon_path()))
-            add_entry_menu.addAction(add_entry_action)
+            right_click_menu.addAction(add_entry_action)
 
-            right_click_menu.addMenu(add_entry_menu)
+            # remove group action
+            remove_group_action = QAction("Remove Group", self)
+            remove_group_action.triggered.connect(lambda: self.right_click_remove_group())
+            right_click_menu.addAction(remove_group_action)
 
             right_click_menu.exec_(QCursor.pos())
-
-            print('RightMousePressed')
 
     # DRAG AND DROP
     def dragEnterEvent(self, e):
@@ -531,24 +532,46 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         entry_name = path_utils.get_file_name(file_path)
         nxs_data = nxs.NexusMetaData()
         nxs_data.add_new_entry(self.tab_name, self.group_name, file_path)
-        new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
-                                 entry_name=entry_name)
+        # new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
+        #                           entry_name=entry_name)
+        # self.icons_widget.addWidget(new_icon)
         # TODO: implement layout correcting function
-        self.icons_widget.addWidget(new_icon)
+        pass
 
     def right_click_add_entry(self, start_dir=""):
         filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
         self.add_new_entry(filepath)
 
+    def right_click_remove_group(self):
+        # Ask user if they are sure
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setWindowFlags(Qt.WindowStaysOnTopHint)
+        msg.setWindowTitle("Delete Group Confirmation")
+        msg.setText("Are you sure you want to delete: %s?" % self.group_name)
+        msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
+
+        if msg.exec_() == QMessageBox.Yes:
+
+            nxs_data = nxs.NexusMetaData()
+
+            nxs_data.remove_group(self.tab_name, self.group_name)
+            print("Removed group %s" % self.group_name)
+            pyqt_utils.delete_widgets_in_layout(self.icons_widget)
+            self.setParent(None)
+            self.deleteLater()
+        else:
+            return
+
     def update_layout(self):
         # TODO: Implement updating of row column layout according to icon size and screenspace
-
         pass
 
 
 class NXSIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
-    def __init__(self, parent, tab_name="", group_name="", entry_name=""):
+    def __init__(self, parent, tab_name="", group_name="",
+                 entry_name=""):
         super().__init__()
         self.setAcceptDrops(True)
         self.parent = parent
@@ -566,17 +589,12 @@ class NXSIconWidget(QLabel):
         self.create_icon()
 
     def set_metadata(self):
-        nxs_data = nxs.NexusMetaData().get_metadata()
-        if self.tab_name in nxs_data.keys() and self.group_name in nxs_data[self.tab_name].keys():
-            entry_dict = nxs_data[self.tab_name][self.group_name][self.entry_name]
-            print(self.entry_name, entry_dict)
-            self.icon_name = entry_dict["icon"]
-            self.source_file = entry_dict["source_file"]
-            self.metadata = entry_dict["metadata"]
-            self.file_extension = entry_dict["file_extension"]
-        else:
-            # defaults
-            pass
+        entry_dict = nxs.NexusMetaData().get_entry(self.tab_name, self.group_name, self.entry_name)
+        print("adding new entry: %s" % self.entry_name)
+        self.icon = entry_dict["icon"]
+        self.source_file = entry_dict["source_file"]
+        self.metadata = entry_dict["metadata"]
+        self.file_extension = entry_dict["file_extension"]
 
     def set_toolTip(self):
         toolTip = "<b>{0}<b>\n<b>Source Location:<b> {1}\n<b>Extension:<b> {2}".format(self.entry_name,
@@ -604,9 +622,9 @@ class NXSIconWidget(QLabel):
 
     def create_icon(self):
         # Setting default icon pixmap
-        self.default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
+        self.default_icon_pixmap = self.get_icon(self.icon, pixmap=True, w=self.icon_width, h=self.icon_height)
         #TODO establish better method for protecting original icon, QPainter seems to override
-        self.protected_default_icon_pixmap = self.get_icon(self.icon_name, pixmap=True, w=self.icon_width, h=self.icon_height)
+        self.protected_default_icon_pixmap = self.get_icon(self.icon, pixmap=True, w=self.icon_width, h=self.icon_height)
 
         self.setPixmap(self.default_icon_pixmap)
 

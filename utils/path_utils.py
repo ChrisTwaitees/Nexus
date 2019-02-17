@@ -34,3 +34,6 @@ def get_file_name(path):
     else:
         return ntpath.split(path)[1].split(".")[0]
 
+
+def exists(path):
+    return os.path.exists(path)
