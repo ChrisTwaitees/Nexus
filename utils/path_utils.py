@@ -34,18 +34,3 @@ def get_file_name(path):
     else:
         return ntpath.split(path)[1].split(".")[0]
 
-
-
-entry_dict =    {"Entry": {
-                "icon_name": "export_icon.png",
-                "icon_location": "",
-                #TODO fetch owner of file
-                "owner": "User",
-                "local_source_file": "path_to_file",
-                "virtual_file_location": "Perforce_path",
-                "metadata": "User entered notes here",
-                "file_extension": ".png"
-                }}
-
-entry_dict["TEST"] = entry_dict.pop(list(entry_dict.keys())[0])
-print(entry_dict)
