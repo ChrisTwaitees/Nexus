@@ -10,7 +10,7 @@ import os
 import webbrowser
 from utils import path_utils
 from utils.gui_utils import pyqt_utils
-from nexus_metadata import nexus_metadata as nxs
+from data.nexus_metadata import nexus_metadata as nxs
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -66,28 +66,8 @@ class NXS_UI(QMainWindow):
         exit_act.triggered.connect(qApp.quit)
         file_menu.addAction(exit_act)
 
-        # Add Action
-        import_menu = QMenu('Add', self)
-
-        # Add from Local Directory Action
-        # TODO define start directories externally
-        import_local_action = QAction('Add from Local Directory', self)
-        import_local_action.setStatusTip('Adds from Local Directory')
-        import_local_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
-        import_menu.addAction(import_local_action)
-        file_menu.addMenu(import_menu)
-
         # INFO MENU
         info_menu = menubar.addMenu('&Info')
-        # Info action
-        info_icon = self.fetch_icon("Info")
-        info_act = QAction(info_icon, '&Info', self)
-        info_act.setShortcut('Ctrl+I')
-        info_act.setStatusTip('Information on this Version of DCC Browser')
-        info_act.triggered.connect(lambda: self.display_version_info())
-
-        info_menu.addAction(info_act)
-
 
         # Help Action
         help_icon = self.fetch_icon("Help")

@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7f6f889-1363-4c0f-8a0c-068940149f4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/icons/folder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/icons/python.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/icons/text.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TEST/TEST.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TEST/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nexus_metadata/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nexus_metadata/nexus_metadata.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,33 +20,17 @@
     <favorites_list name="Nexus" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.36202186">
+    <splitter split-orientation="horizontal" split-proportion="0.48356164">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2652">
-                  <caret line="157" selection-start-line="157" selection-end-line="157" />
-                  <folding>
-                    <element signature="e#0#11#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="538">
-                  <caret line="556" column="45" selection-start-line="556" selection-start-column="45" selection-end-line="556" selection-end-column="45" />
+                <state relative-caret-position="305">
+                  <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
                   <folding>
-                    <element signature="e#0#110#1" />
-                    <element signature="e#383#6311#0" />
-                    <element signature="e#411#900#0" />
+                    <element signature="e#111#121#0" expanded="true" />
                     <element signature="e#935#1151#0" />
-                    <element signature="e#1192#3819#0" />
-                    <element signature="e#1733#1766#0" />
                     <element signature="e#2908#2918#0" />
                     <element signature="e#3859#4480#0" />
                     <element signature="e#3859#3868#0" />
@@ -97,7 +78,116 @@
                     <element signature="e#14749#15092#0" />
                     <element signature="e#15127#15708#0" />
                     <element signature="e#15364#15675#0" />
+                    <element signature="e#15773#20387#0" />
+                    <element signature="e#15831#16246#0" />
+                    <element signature="e#16284#16652#0" />
+                    <element signature="e#16691#16771#0" />
+                    <element signature="e#16811#17442#0" />
+                    <element signature="e#17514#18134#0" />
+                    <element signature="e#17594#18134#0" />
+                    <element signature="e#18197#18379#0" />
+                    <element signature="e#18234#18310#0" />
+                    <element signature="e#18337#18379#0" />
+                    <element signature="e#18422#18462#0" />
+                    <element signature="e#18500#18793#0" />
+                    <element signature="e#18537#18756#0" />
+                    <element signature="e#18651#18722#0" />
+                    <element signature="e#18833#18883#0" />
+                    <element signature="e#18968#19595#0" />
                     <element signature="e#19052#19255#0" />
+                    <element signature="e#19430#19595#0" />
+                    <element signature="e#19648#20055#0" />
+                    <element signature="e#20116#20248#0" />
+                    <element signature="e#20287#20387#0" />
+                    <element signature="e#20423#29318#0" />
+                    <element signature="e#20559#20988#0" />
+                    <element signature="e#21026#21573#0" />
+                    <element signature="e#21183#21519#0" />
+                    <element signature="e#21546#21573#0" />
+                    <element signature="e#21610#21951#0" />
+                    <element signature="e#21991#22615#0" />
+                    <element signature="e#22361#22442#0" />
+                    <element signature="e#22482#22562#0" />
+                    <element signature="e#22652#23721#0" />
+                    <element signature="e#23793#24034#0" />
+                    <element signature="e#23837#23908#0" />
+                    <element signature="e#23962#24034#0" />
+                    <element signature="e#24080#24367#0" />
+                    <element signature="e#24122#24250#0" />
+                    <element signature="e#24417#24521#0" />
+                    <element signature="e#24461#24521#0" />
+                    <element signature="e#24571#24629#0" />
+                    <element signature="e#24680#25986#0" />
+                    <element signature="e#24723#25986#0" />
+                    <element signature="e#24807#24821#0" />
+                    <element signature="e#26044#26141#0" />
+                    <element signature="e#26180#26283#0" />
+                    <element signature="e#26354#27028#0" />
+                    <element signature="e#27099#27228#0" />
+                    <element signature="e#27271#27408#0" />
+                    <element signature="e#27473#27505#0" />
+                    <element signature="e#27563#27741#0" />
+                    <element signature="e#27825#28119#0" />
+                    <element signature="e#27846#27963#0" />
+                    <element signature="e#27997#28119#0" />
+                    <element signature="e#28173#28396#0" />
+                    <element signature="e#28445#28505#0" />
+                    <element signature="e#28543#29318#0" />
+                    <element signature="e#28992#29213#0" />
+                    <element signature="e#29352#29424#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/data/nexus_metadata/nexus_metadata.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="85">
+                  <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+                  <folding>
+                    <element signature="e#68#5180#0" />
+                    <element signature="e#96#265#0" />
+                    <element signature="e#331#619#0" />
+                    <element signature="e#376#481#0" />
+                    <element signature="e#382#461#0" />
+                    <element signature="e#508#619#0" />
+                    <element signature="e#680#1132#0" />
+                    <element signature="e#733#1039#0" />
+                    <element signature="e#794#921#0" />
+                    <element signature="e#800#897#0" />
+                    <element signature="e#956#1039#0" />
+                    <element signature="e#1204#1919#0" />
+                    <element signature="e#1217#1458#0" />
+                    <element signature="e#1227#1457#0" />
+                    <element signature="e#1543#1826#0" />
+                    <element signature="e#1986#2199#0" />
+                    <element signature="e#2039#2199#0" />
+                    <element signature="e#2259#2507#0" />
+                    <element signature="e#2335#2507#0" />
+                    <element signature="e#2579#2862#0" />
+                    <element signature="e#2678#2862#0" />
+                    <element signature="e#2915#3033#0" />
+                    <element signature="e#2978#3033#0" />
+                    <element signature="e#3076#3273#0" />
+                    <element signature="e#3330#3539#0" />
+                    <element signature="e#3608#3854#0" />
+                    <element signature="e#3915#4003#0" />
+                    <element signature="e#4101#5180#0" />
+                    <element signature="e#4166#5180#0" />
+                    <element signature="e#4210#5034#0" />
+                    <element signature="e#4250#4980#0" />
+                    <element signature="e#4314#4806#0" />
+                    <element signature="e#4362#4736#0" />
+                    <element signature="e#4524#4736#0" />
+                    <element signature="e#4545#4677#0" />
+                    <element signature="e#4857#4980#0" />
+                    <element signature="e#5069#5180#0" />
+                    <element signature="e#5198#5858#0" />
+                    <element signature="e#5231#5855#0" />
+                    <element signature="e#5271#5844#0" />
+                    <element signature="e#5308#5549#0" />
+                    <element signature="e#5585#5826#0" />
                   </folding>
                 </state>
               </provider>
@@ -107,10 +197,10 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/data/nexus_metadata/nexus_metadata.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="266">
+                <state relative-caret-position="1377">
                   <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
@@ -119,16 +209,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/utils/path_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="765">
-                  <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+                <state relative-caret-position="612">
+                  <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -137,9 +222,14 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1258">
+                <state relative-caret-position="384">
                   <caret line="98" selection-start-line="98" selection-end-line="98" />
                   <folding>
                     <element signature="e#0#139#1" />
@@ -158,71 +248,6 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="51">
                   <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/main/main.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3230">
-                  <caret line="614" selection-start-line="614" selection-end-line="616" />
-                  <folding>
-                    <element signature="e#0#110#1" />
-                    <element signature="e#383#6311#0" />
-                    <element signature="e#411#900#0" />
-                    <element signature="e#935#1151#0" />
-                    <element signature="e#1192#3819#0" />
-                    <element signature="e#1733#1766#0" />
-                    <element signature="e#2908#2918#0" />
-                    <element signature="e#3859#4480#0" />
-                    <element signature="e#3859#3868#0" />
-                    <element signature="e#4519#5441#0" />
-                    <element signature="e#4807#5376#0" />
-                    <element signature="e#4851#5376#0" />
-                    <element signature="e#5039#5376#0" />
-                    <element signature="e#5474#5530#0" />
-                    <element signature="e#5562#5704#0" />
-                    <element signature="e#5750#5858#0" />
-                    <element signature="e#5912#6065#0" />
-                    <element signature="e#6112#6225#0" />
-                    <element signature="e#6271#6311#0" />
-                    <element signature="e#6355#9470#0" />
-                    <element signature="e#6383#6553#0" />
-                    <element signature="e#6593#7159#0" />
-                    <element signature="e#7206#8179#0" />
-                    <element signature="e#8213#8615#0" />
-                    <element signature="e#8248#8417#0" />
-                    <element signature="e#8444#8615#0" />
-                    <element signature="e#8658#9198#0" />
-                    <element signature="e#8749#9198#0" />
-                    <element signature="e#8793#9198#0" />
-                    <element signature="e#8937#9198#0" />
-                    <element signature="e#9108#9198#0" />
-                    <element signature="e#9231#9470#0" />
-                    <element signature="e#9507#13318#0" />
-                    <element signature="e#9543#10148#0" />
-                    <element signature="e#10192#11348#0" />
-                    <element signature="e#10272#11348#0" />
-                    <element signature="e#11060#11307#0" />
-                    <element signature="e#11406#12074#0" />
-                    <element signature="e#11515#11958#0" />
-                    <element signature="e#11724#11917#0" />
-                    <element signature="e#11985#12074#0" />
-                    <element signature="e#12135#13205#0" />
-                    <element signature="e#12195#13061#0" />
-                    <element signature="e#12728#13020#0" />
-                    <element signature="e#13088#13205#0" />
-                    <element signature="e#13266#13318#0" />
-                    <element signature="e#13354#15708#0" />
-                    <element signature="e#13396#14625#0" />
-                    <element signature="e#14431#14476#0" />
-                    <element signature="e#14669#15092#0" />
-                    <element signature="e#14749#15092#0" />
-                    <element signature="e#15127#15708#0" />
-                    <element signature="e#15364#15675#0" />
-                    <element signature="e#19052#19255#0" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -271,9 +296,9 @@
         <option value="$PROJECT_DIR$/utils/gui_utils/style/darkorange.css" />
         <option value="$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py" />
         <option value="$PROJECT_DIR$/utils/path_utils.py" />
-        <option value="$PROJECT_DIR$/main/main.py" />
-        <option value="$PROJECT_DIR$/nexus_metadata/nexus_metadata.py" />
         <option value="$PROJECT_DIR$/TEST/TEST.py" />
+        <option value="$PROJECT_DIR$/nexus_metadata/nexus_metadata.py" />
+        <option value="$PROJECT_DIR$/main/main.py" />
       </list>
     </option>
   </component>
@@ -300,51 +325,7 @@
             <path>
               <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="icons" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="nexus_metadata" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="TEST" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="gui_utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Nexus" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="gui_utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="style" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -564,7 +545,28 @@
       <option name="project" value="LOCAL" />
       <updated>1550415372041</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="removing test from Git">
+      <created>1550416336024</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1550416336024</updated>
+    </task>
+    <task id="LOCAL-00011" summary="removing test from Git">
+      <created>1550416552603</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1550416552603</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Removing testing text">
+      <created>1550416625973</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1550416625973</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -576,7 +578,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.503792" side_tool="true" weight="0.19189766" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.08125677" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.08125677" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.19501625" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -600,7 +602,9 @@
     <MESSAGE value="Adding more drag and drop functionality&#10;Hooking in nxs data adding of groups and deleting of tabs&#10;Fixed some event bugs&#10;TODO: Remove Group&#10;TODO: Add New Entry from right click or drag and drop&#10;TODO: QMimeData parser" />
     <MESSAGE value="shrinking default icon size" />
     <MESSAGE value="Getting and checking of NXS data&#10;adding icons&#10;simplifying config data entries&#10;adding entry path utils" />
-    <option name="LAST_COMMIT_MESSAGE" value="Getting and checking of NXS data&#10;adding icons&#10;simplifying config data entries&#10;adding entry path utils" />
+    <MESSAGE value="removing test from Git" />
+    <MESSAGE value="Removing testing text" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing testing text" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,29 +655,16 @@
     <entry file="file://$PROJECT_DIR$/data/icons/refresh_icon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/nexus_metadata/nexus_metadata.py">
+    <entry file="file://$PROJECT_DIR$/data/config/nexus_metadata.nxs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/path_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/gui_utils/pyqt_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
+        <state relative-caret-position="384">
           <caret line="98" selection-start-line="98" selection-end-line="98" />
           <folding>
             <element signature="e#0#139#1" />
@@ -686,24 +677,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/config/nexus_metadata.nxs">
+    <entry file="file://$PROJECT_DIR$/utils/path_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        <state relative-caret-position="612">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/nexus_metadata/nexus_metadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+          <folding>
+            <element signature="e#68#5180#0" />
+            <element signature="e#96#265#0" />
+            <element signature="e#331#619#0" />
+            <element signature="e#376#481#0" />
+            <element signature="e#382#461#0" />
+            <element signature="e#508#619#0" />
+            <element signature="e#680#1132#0" />
+            <element signature="e#733#1039#0" />
+            <element signature="e#794#921#0" />
+            <element signature="e#800#897#0" />
+            <element signature="e#956#1039#0" />
+            <element signature="e#1204#1919#0" />
+            <element signature="e#1217#1458#0" />
+            <element signature="e#1227#1457#0" />
+            <element signature="e#1543#1826#0" />
+            <element signature="e#1986#2199#0" />
+            <element signature="e#2039#2199#0" />
+            <element signature="e#2259#2507#0" />
+            <element signature="e#2335#2507#0" />
+            <element signature="e#2579#2862#0" />
+            <element signature="e#2678#2862#0" />
+            <element signature="e#2915#3033#0" />
+            <element signature="e#2978#3033#0" />
+            <element signature="e#3076#3273#0" />
+            <element signature="e#3330#3539#0" />
+            <element signature="e#3608#3854#0" />
+            <element signature="e#3915#4003#0" />
+            <element signature="e#4101#5180#0" />
+            <element signature="e#4166#5180#0" />
+            <element signature="e#4210#5034#0" />
+            <element signature="e#4250#4980#0" />
+            <element signature="e#4314#4806#0" />
+            <element signature="e#4362#4736#0" />
+            <element signature="e#4524#4736#0" />
+            <element signature="e#4545#4677#0" />
+            <element signature="e#4857#4980#0" />
+            <element signature="e#5069#5180#0" />
+            <element signature="e#5198#5858#0" />
+            <element signature="e#5231#5855#0" />
+            <element signature="e#5271#5844#0" />
+            <element signature="e#5308#5549#0" />
+            <element signature="e#5585#5826#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3230">
-          <caret line="614" selection-start-line="614" selection-end-line="616" />
+        <state relative-caret-position="305">
+          <caret line="68" column="19" lean-forward="true" selection-start-line="68" selection-start-column="19" selection-end-line="68" selection-end-column="19" />
           <folding>
-            <element signature="e#0#110#1" />
-            <element signature="e#383#6311#0" />
-            <element signature="e#411#900#0" />
+            <element signature="e#111#121#0" expanded="true" />
             <element signature="e#935#1151#0" />
-            <element signature="e#1192#3819#0" />
-            <element signature="e#1733#1766#0" />
             <element signature="e#2908#2918#0" />
             <element signature="e#3859#4480#0" />
             <element signature="e#3859#3868#0" />
@@ -751,13 +795,66 @@
             <element signature="e#14749#15092#0" />
             <element signature="e#15127#15708#0" />
             <element signature="e#15364#15675#0" />
+            <element signature="e#15773#20387#0" />
+            <element signature="e#15831#16246#0" />
+            <element signature="e#16284#16652#0" />
+            <element signature="e#16691#16771#0" />
+            <element signature="e#16811#17442#0" />
+            <element signature="e#17514#18134#0" />
+            <element signature="e#17594#18134#0" />
+            <element signature="e#18197#18379#0" />
+            <element signature="e#18234#18310#0" />
+            <element signature="e#18337#18379#0" />
+            <element signature="e#18422#18462#0" />
+            <element signature="e#18500#18793#0" />
+            <element signature="e#18537#18756#0" />
+            <element signature="e#18651#18722#0" />
+            <element signature="e#18833#18883#0" />
+            <element signature="e#18968#19595#0" />
             <element signature="e#19052#19255#0" />
+            <element signature="e#19430#19595#0" />
+            <element signature="e#19648#20055#0" />
+            <element signature="e#20116#20248#0" />
+            <element signature="e#20287#20387#0" />
+            <element signature="e#20423#29318#0" />
+            <element signature="e#20559#20988#0" />
+            <element signature="e#21026#21573#0" />
+            <element signature="e#21183#21519#0" />
+            <element signature="e#21546#21573#0" />
+            <element signature="e#21610#21951#0" />
+            <element signature="e#21991#22615#0" />
+            <element signature="e#22361#22442#0" />
+            <element signature="e#22482#22562#0" />
+            <element signature="e#22652#23721#0" />
+            <element signature="e#23793#24034#0" />
+            <element signature="e#23837#23908#0" />
+            <element signature="e#23962#24034#0" />
+            <element signature="e#24080#24367#0" />
+            <element signature="e#24122#24250#0" />
+            <element signature="e#24417#24521#0" />
+            <element signature="e#24461#24521#0" />
+            <element signature="e#24571#24629#0" />
+            <element signature="e#24680#25986#0" />
+            <element signature="e#24723#25986#0" />
+            <element signature="e#24807#24821#0" />
+            <element signature="e#26044#26141#0" />
+            <element signature="e#26180#26283#0" />
+            <element signature="e#26354#27028#0" />
+            <element signature="e#27099#27228#0" />
+            <element signature="e#27271#27408#0" />
+            <element signature="e#27473#27505#0" />
+            <element signature="e#27563#27741#0" />
+            <element signature="e#27825#28119#0" />
+            <element signature="e#27846#27963#0" />
+            <element signature="e#27997#28119#0" />
+            <element signature="e#28173#28396#0" />
+            <element signature="e#28445#28505#0" />
+            <element signature="e#28543#29318#0" />
+            <element signature="e#28992#29213#0" />
+            <element signature="e#29352#29424#0" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TEST/TEST.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
