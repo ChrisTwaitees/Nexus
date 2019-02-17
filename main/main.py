@@ -445,6 +445,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.icon_size = parent.icon_size
         self.minimum_width = parent.minimum_width
 
+        # Build
         self.construction()
         self.create_layout()
         self.create_widgets()
@@ -481,21 +482,6 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         # Highlight Widget
         self.highlight = pyqt_utils.HighlightWidget(self, alpha=125)
 
-    def add_entries(self, entries, tab_name, group_name):
-        columns = self.parent.icon_horizontal_max
-        if len(entries) != 0:
-            if len(entries) % columns != 0:
-                rows = int(len(entries) / self.parent.icon_horizontal_max) + 1
-            else:
-                rows = int(len(entries) / self.parent.icon_horizontal_max)
-        else:
-            return
-        positions = [(i, j) for i in range(rows) for j in range(columns)]
-        for position, name in zip(positions, entries):
-            # TODO implement build from metadata
-            browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
-            self.icons_widget.layout.addWidget(browser_icon, *position)
-
     # MOUSE CLICK HANDLERS
 
     def mousePressEvent(self, e):
@@ -515,14 +501,6 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
             right_click_menu.exec_(QCursor.pos())
 
             print('RightMousePressed')
-
-    def right_click_add_entry(self, start_dir=""):
-        filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
-        self.add_new_entry(filepath)
-
-    def add_new_entry(self, filepath=""):
-        # TODO: Add entry to entry dat
-        pass
 
     # DRAG AND DROP
     def dragEnterEvent(self, e):
@@ -553,6 +531,40 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         self.highlight.resize(e.size())
         e.accept()
 
+    # FUNCTIONS
+
+    def add_entries(self, entries, tab_name, group_name):
+        columns = self.parent.icon_horizontal_max
+        if len(entries) != 0:
+            if len(entries) % columns != 0:
+                rows = int(len(entries) / self.parent.icon_horizontal_max) + 1
+            else:
+                rows = int(len(entries) / self.parent.icon_horizontal_max)
+        else:
+            return
+        positions = [(i, j) for i in range(rows) for j in range(columns)]
+        for position, name in zip(positions, entries):
+            browser_icon = NXSIconWidget(self, tab_name=tab_name, group_name=group_name, entry_name=name)
+            self.icons_widget.layout.addWidget(browser_icon, *position)
+
+    def add_new_entry(self, file_path=""):
+        entry_name = path_utils.get_file_name(file_path)
+        nxs_data = nxs.NexusMetaData()
+        nxs_data.add_new_entry(self.tab_name, self.group_name, file_path)
+        new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
+                                 entry_name=entry_name)
+        # TODO: implement layout correcting function
+        self.icons_widget.addWidget(new_icon)
+
+    def right_click_add_entry(self, start_dir=""):
+        filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
+        self.add_new_entry(filepath)
+
+    def update_layout(self):
+        # TODO: Implement updating of row column layout according to icon size and screenspace
+
+        pass
+
 
 class NXSIconWidget(QLabel):
     #TODO raise borders, make selectable, read meta, aff
@@ -578,11 +590,8 @@ class NXSIconWidget(QLabel):
         if self.tab_name in nxs_data.keys() and self.group_name in nxs_data[self.tab_name].keys():
             entry_dict = nxs_data[self.tab_name][self.group_name][self.entry_name]
             print(self.entry_name, entry_dict)
-            self.icon_name = entry_dict["icon_name"]
-            self.icon_location = entry_dict["icon_location"]
-            self.owner = entry_dict["owner"]
-            self.local_source_file = entry_dict["local_source_file"]
-            self.virtual_file_location = entry_dict["virtual_file_location"]
+            self.icon_name = entry_dict["icon"]
+            self.source_file = entry_dict["source_file"]
             self.metadata = entry_dict["metadata"]
             self.file_extension = entry_dict["file_extension"]
         else:
@@ -591,7 +600,7 @@ class NXSIconWidget(QLabel):
 
     def set_toolTip(self):
         toolTip = "<b>{0}<b>\n<b>Source Location:<b> {1}\n<b>Extension:<b> {2}".format(self.entry_name,
-                                                                                       self.local_source_file,
+                                                                                       self.source_file,
                                                                                        self.file_extension)
         self.setToolTip(toolTip)
 
@@ -684,7 +693,7 @@ class NXSIconWidget(QLabel):
 
             # Go to Local File Location
             open_file_browser = QAction('Open Local File Directory', self)
-            open_file_browser.triggered.connect(lambda: self.open_file_browser(start_dir=self.local_source_file))
+            open_file_browser.triggered.connect(lambda: self.open_file_browser(start_dir=self.source_file))
             right_click_menu.addAction(open_file_browser)
 
             right_click_menu.exec_(QCursor.pos())
@@ -708,7 +717,7 @@ class NXSIconWidget(QLabel):
 
         # TODO: MimeData handler depending on icon's metadata
         mimedata = QMimeData()
-        mimedata.setText(self.local_source_file)
+        mimedata.setText(self.source_file)
 
         # Drag and dropping data
         drag.setMimeData(mimedata)

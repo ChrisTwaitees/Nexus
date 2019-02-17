@@ -47,9 +47,9 @@ def delete_widgets_in_layout(parent):
 def set_stylesheet(object, style):
      css_path_dir = os.path.dirname(__file__)
      css_path = os.path.join(css_path_dir, "style", "%s.css"%style)
-     with open(css_path, 'r') as css:
-         object.setStyleSheet(css.read())
-         print (css.read())
+     if os.path.exists(css_path):
+         with open(css_path, 'r') as css:
+             object.setStyleSheet(css.read())
 
 
 class SimpleWindow(qw.QMainWindow):
