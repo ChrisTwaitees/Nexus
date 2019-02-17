@@ -1,37 +1,7 @@
 {
   "TAB1": {
     "GROUP2": {
-      "Test_Prop6": {
-        "icon": "export_icon.png",
-        "source_file": "path_to_file",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      },
-      "Test_Prop7": {
-        "icon": "export_icon.png",
-        "source_file": "path_to_file",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      },
-      "Test_Prop8": {
-        "icon": "export_icon.png",
-        "source_file": "path_to_file",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      },
-      "Test_Prop9": {
-        "icon": "export_icon.png",
-        "source_file": "path_to_file",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      },
       "Test_Prop10": {
-        "icon": "export_icon.png",
-        "source_file": "path_to_file",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      },
-      "Test_Prop11": {
         "icon": "export_icon.png",
         "source_file": "path_to_file",
         "metadata": "User entered notes here",
@@ -49,27 +19,121 @@
         "metadata": "User entered notes here",
         "file_extension": ".png"
       },
-      "refresh_icon": {
+      "voronoi": {
         "icon": "export_icon.png",
-        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\refresh_icon.png",
-        "metadata": "User entered notes here",
-        "file_extension": ".png"
-      }
-    }
-  },
-  "asdff": {
-    "sadfsdf": {
-      "python": {
-        "icon": "export_icon.png",
-        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\python.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\voronoi.png",
         "metadata": "User entered notes here",
         "file_extension": ".png"
       },
-      "text": {
+      "export_icon": {
         "icon": "export_icon.png",
-        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\text.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\PycharmProjects\\Nexus\\data\\icons\\export_icon.png",
         "metadata": "User entered notes here",
         "file_extension": ".png"
+      },
+      "backup": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Houdini DEV\\backup",
+        "metadata": "User entered notes here",
+        "file_extension": ""
+      },
+      "Siku_Rigarnold_35_completing opening animation_01": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Kariba\\Siku\\scenes\\Siku_Rigarnold_35_completing opening animation_01.mb",
+        "metadata": "User entered notes here",
+        "file_extension": ".mb"
+      },
+      "license": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\MakeHuman\\license.txt",
+        "metadata": "User entered notes here",
+        "file_extension": ".txt"
+      },
+      "makehuman": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\MakeHuman\\makehuman.exe",
+        "metadata": "User entered notes here",
+        "file_extension": ".exe"
+      },
+      "Uplay": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\Desktop\\Uplay.lnk",
+        "metadata": "User entered notes here",
+        "file_extension": ".lnk"
+      },
+      "3D": {
+        "icon": "export_icon.png",
+        "source_file": "C:\\Users\\Chris Thwaites\\Desktop\\3D",
+        "metadata": "User entered notes here",
+        "file_extension": ""
+      },
+      "enver-bike-delivery02": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Forgotten Snow White\\Feedback\\enver-bike-delivery02.jpg",
+        "metadata": "User entered notes here",
+        "file_extension": ".jpg"
+      }
+    }
+  },
+  "3D": {
+    "Software": {
+      "CUSTOM PARTICLE SIM": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Houdini DEV\\CUSTOM PARTICLE SIM.hip",
+        "metadata": "User entered notes here",
+        "file_extension": ".hip"
+      },
+      "FlowerEmerging_bak1": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Houdini DEV\\backup\\FlowerEmerging_bak1.hipnc",
+        "metadata": "User entered notes here",
+        "file_extension": ".hipnc"
+      },
+      "SPACECOLONIZATION": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Houdini DEV\\SPACECOLONIZATION.hipnc",
+        "metadata": "User entered notes here",
+        "file_extension": ".hipnc"
+      }
+    },
+    "Reference": {
+      "Siku_Arnold5_KeyShots__Eyebrow": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Kariba\\Siku\\scenes\\Siku_Arnold5_KeyShots__Eyebrow.xgen",
+        "metadata": "User entered notes here",
+        "file_extension": ".xgen"
+      },
+      "Notes_03": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Forgotten Snow White\\SnowWhite_Sculpt\\sculpt\\Notes_03.ZPR",
+        "metadata": "User entered notes here",
+        "file_extension": ".ZPR"
+      },
+      "diffuse": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Forgotten Snow White\\SnowWhite_Sculpt\\diffuse.jpg",
+        "metadata": "User entered notes here",
+        "file_extension": ".jpg"
+      },
+      "startdress_mid": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Forgotten Snow White\\SnowWhite_Sculpt\\startdress_mid.obj",
+        "metadata": "User entered notes here",
+        "file_extension": ".obj"
+      },
+      "sculpt": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Forgotten Snow White\\SnowWhite_Sculpt\\sculpt",
+        "metadata": "User entered notes here",
+        "file_extension": ""
+      }
+    },
+    "Personal Projects": {
+      "Siku_Arnold5_KeyShots_03": {
+        "icon": "export_icon.png",
+        "source_file": "G:\\Kariba\\Siku\\scenes\\Siku_Arnold5_KeyShots_03.mb",
+        "metadata": "User entered notes here",
+        "file_extension": ".mb"
       }
     }
   }

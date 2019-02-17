@@ -194,6 +194,7 @@ class SimpleCollapsibleWidget(qw.QGroupBox):
         else:
             self.setFixedHeight(self.fontMetrics().height())
 
+
 class HighlightWidget(qw.QWidget):
     def __init__(self, parent, alpha=125):
         super(HighlightWidget, self).__init__(parent)
@@ -215,3 +216,4 @@ class HighlightWidget(qw.QWidget):
         painter.setRenderHint(qg.QPainter.Antialiasing)
         painter.fillRect(event.rect(), qg.QBrush(self.highlight_colour))
         painter.setPen(qg.QPen(qc.Qt.NoPen))
+        painter.end()

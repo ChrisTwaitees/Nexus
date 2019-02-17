@@ -5,6 +5,9 @@ scriptDir = os.path.dirname(os.path.realpath(__file__))
 solutionName = "Nexus"
 
 
+def get_icon_dir():
+    return (scriptDir.split(solutionName)[0] + os.path.join(solutionName, "data", "icons", ""))
+
 def get_icon_path(icon_name=""):
     return (scriptDir.split(solutionName)[0] + os.path.join(solutionName, "data", "icons", "") + icon_name)
 

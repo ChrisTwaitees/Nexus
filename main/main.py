@@ -79,17 +79,7 @@ class NXS_UI(QMainWindow):
 
 
         # TOOL BAR
-        # TODO implement icon based utilities like loading, adding, assigning icon to selection, opening metadata source
         toolbar = self.addToolBar("Exit")
-
-        # Add New Entry Action
-        add_icon = self.fetch_icon("Add")
-        add_action = QAction(add_icon, "Add New", self)
-        add_action.setShortcut("Ctrl+O")
-        add_action.setStatusTip("Adds New Entry to current Tab")
-        # TODO start directory should be dependent on current tab
-        add_action.triggered.connect(lambda: self.open_file_browser(start_dir=""))
-        toolbar.addAction(add_action)
 
         # Refresh TABS and Tree
         refresh_icon = self.fetch_icon("Refresh")
@@ -243,7 +233,6 @@ class NXSTreeBrowserWidget(QWidget):
                         group_name.appendRow(entry_name)
 
     def refresh(self):
-        # TODO implement refresh function to delete all entries and then re-add
         if self.nxs_tree.model.hasChildren():
             self.nxs_tree.model.removeRows(0, self.nxs_tree.model.rowCount())
         self.add_items(self.nxs_tree.model)
@@ -304,7 +293,6 @@ class NXSTabsWidget(QWidget):
                 pass
 
     def add_tab(self, tab_name="", user=False):
-        # TODO: Update the nxs data with new tab
         nxs_data = nxs.NexusMetaData()
         if user:
             tab_name = pyqt_utils.get_user_text(self.parent, header="New Tab",
@@ -344,7 +332,6 @@ class NXSTabsWidget(QWidget):
             else:
                 return
         else:
-            # TODO: implement delete of tab through referencing
             self.tabs.addTab(NXSTabWidget(self.parent, tab_name))
 
     def rename_tab(self, tab_name="", user=False):
@@ -463,7 +450,6 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
         # Highlight Widget
         self.highlight = pyqt_utils.HighlightWidget(self, alpha=125)
-        self.icon_objects = []
 
     # MOUSE CLICK HANDLERS
 
@@ -506,6 +492,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
             e.accept()
             for url in e.mimeData().urls():
                 path = str(url.toLocalFile())
+                self.add_new_entry(path)
                 print("Adding %s" % path)
             self.highlight.hide()
         else:
@@ -513,7 +500,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
     def resizeEvent(self, e):
         self.highlight.resize(e.size())
-        self.update_layout()
+        self.refresh_layout()
         e.accept()
 
     # FUNCTIONS
@@ -532,10 +519,9 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
         new_icon = NXSIconWidget(self, tab_name=self.tab_name, group_name=self.group_name,
                                   entry_name=entry_name)
+
         empty_position = self.get_empty_position()
         self.icons_widget.layout.addWidget(new_icon, *empty_position)
-        # TODO: implement layout correcting function
-        pass
 
     def get_empty_position(self):
         rows = self.icons_widget.layout.rowCount()
@@ -551,7 +537,8 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
     def right_click_add_entry(self, start_dir=""):
         filepath = QFileDialog.getOpenFileName(self, "Open File", path_utils.get_os_path(start_dir))[0]
-        self.add_new_entry(filepath)
+        if path_utils.exists(filepath):
+            self.add_new_entry(filepath)
 
     def right_click_remove_group(self):
         # Ask user if they are sure
@@ -574,7 +561,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         else:
             return
 
-    def update_layout(self):
+    def refresh_layout(self, force=False):
         #get all widgets
         icon_widgets = []
         rows = self.icons_widget.layout.rowCount()
@@ -585,7 +572,7 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
         max_columns = current_x//(self.icon_size + (self.icon_spacing*2))
 
         # collect widget pointers (order matters!)
-        if columns < max_columns or columns > max_columns:
+        if columns < max_columns or columns > max_columns or force:
             for r in range(rows):
                 for c in range(columns):
                     widget = self.icons_widget.layout.itemAtPosition(r, c)
@@ -605,7 +592,6 @@ class NXSGroupWidget(pyqt_utils.SimpleCollapsibleWidget):
 
 
 class NXSIconWidget(QLabel):
-    #TODO raise borders, make selectable, read meta, aff
     def __init__(self, parent, tab_name="", group_name="",
                  entry_name=""):
         super().__init__()
@@ -623,6 +609,7 @@ class NXSIconWidget(QLabel):
         self.set_toolTip()
         self.set_aesthetics()
         self.create_icon()
+
 
     def set_metadata(self):
         entry_dict = nxs.NexusMetaData().get_entry(self.tab_name, self.group_name, self.entry_name)
@@ -658,23 +645,10 @@ class NXSIconWidget(QLabel):
 
     def create_icon(self):
         # Setting default icon pixmap
-        self.default_icon_pixmap = self.get_icon(self.icon, pixmap=True, w=self.icon_width, h=self.icon_height)
-        #TODO establish better method for protecting original icon, QPainter seems to override
-        self.protected_default_icon_pixmap = self.get_icon(self.icon, pixmap=True, w=self.icon_width, h=self.icon_height)
-
+        self.default_icon_pixmap = self.get_icon()
         self.setPixmap(self.default_icon_pixmap)
-
-        # Creating Highlight Overlay
-        self.highlight_pixmap = QPixmap(self.default_icon_pixmap.width(), self.default_icon_pixmap.height())
-        self.highlight_pixmap.fill(self.highlight_colour)
-
-        # Using QPainter in Color Dodge to create overlayed highlight of icon
-        self.highlight_painter = QPainter()
-        self.highlight_painter.begin(self.default_icon_pixmap)
-        self.highlight_painter.setCompositionMode(QPainter.CompositionMode_ColorDodge)
-        self.highlight_painter.setOpacity(self.highlight_opacity )
-        self.highlight_painter.drawPixmap(0,0,self.highlight_pixmap)
-        self.highlight_painter.end()
+        # TODO : fix highlight paint
+        self.highlight = pyqt_utils.HighlightWidget(self, alpha=125)
 
     # MOUSE CLICK HANDLING
 
@@ -734,12 +708,14 @@ class NXSIconWidget(QLabel):
 
     # MOUSE HOVERS
     def enterEvent(self, e):
+        e.accept()
         self.setStyleSheet(self.highlighted_style_sheet)
-        self.setPixmap(self.default_icon_pixmap)
+        self.highlight.show()
 
     def leaveEvent(self, e):
+        e.accept()
         self.setStyleSheet(self.default_style_sheet)
-        self.setPixmap(self.protected_default_icon_pixmap)
+        self.highlight.hide()
 
     # DRAG AND DROP - LEAVE
     def mouseMoveEvent(self, e):
@@ -765,34 +741,60 @@ class NXSIconWidget(QLabel):
 
     # DRAG AND DROP - ENTER
     def dragEnterEvent(self, e):
-        self.setStyleSheet(self.highlighted_style_sheet)
-        self.setPixmap(self.default_icon_pixmap)
+        e.accept()
         print("dragEnterEvent")
+        self.setStyleSheet(self.highlighted_style_sheet)
 
     def dragLeaveEvent(self, e):
-        print("drag leave event")
+        e.accept()
         self.setStyleSheet(self.default_style_sheet)
-        self.setPixmap(self.protected_default_icon_pixmap)
+        print("drag leave event")
 
     # DRAG AND DROP - DROP
     def dropEvent(self, e):
         print("dropEventTriggered" * 40)
 
     # UTILITIES
-
     def take_screenshot(self):
         # TODO implement legitimate screenshot method
         img = QApplication.primaryScreen().grabWindow(0)
         img.scaled(100,100, Qt.KeepAspectRatio)
         self.setPixmap(img)
 
-    def get_icon(self, icon_name, pixmap=True, icon=False, w=100, h=100):
-        if icon:
-            icon_type = pyqt_utils.icons_dict(icon_name)
-            return self.style().standardIcon(getattr(QStyle, icon_type))
-        elif pixmap:
-            icon_pixmap = QPixmap(path_utils.get_icon_path(icon_name))
-            return icon_pixmap.scaled(w, h, Qt.KeepAspectRatio)
+    def get_icon(self):
+        self.icon = None
+        extension = path_utils.get_extension(self.source_file).lower()
+        ext_dict = {(".ma",".mb",".xgen"): "maya.jpg",
+                    (".fbx"): "motionbuilder.png",
+                    (".hipnc", ".hip"): "houdini.jpg",
+                    (".3ds"): "max.jpg",
+                    (".py"): "python.png",
+                    (""): "folder.png",
+                    (".txt", ".html"): "text.png",
+                    (".mp4", ".mov"): "movie.png",
+                    (".png", ".jpg"): "image.png",
+                    (".obj", ".abc"): "mesh.jpg",
+                    (".zpr"): "zbrush.png",
+                    (".exe"): "application.png",
+                    (".lnk"): "shortcut.png"
+                    }
+
+        if path_utils.exists(self.source_file):
+            if extension == "":
+                self.icon = "folder.png"
+            for extensions, icon_name in ext_dict.items():
+                if self.icon is None:
+                    print(extension, extensions)
+                    if extension in extensions:
+                        self.icon = icon_name
+            if self.icon is None:
+                self.icon = "default.png"
+        else:
+            self.icon = "default.png"
+
+
+        icon_pixmap = QPixmap(path_utils.get_icon_path(self.icon))
+        return icon_pixmap.scaled(self.icon_width, self.icon_width, Qt.KeepAspectRatio)
 
     def open_file_browser(self, start_dir):
         if os.path.exists(start_dir):
@@ -800,12 +802,7 @@ class NXSIconWidget(QLabel):
         else:
             print("path to: %s , does not exist please look at nxs data" % start_dir)
 
-    def refresh_icon(self, icon_name):
-        # TODO implement more robust refresh handling
-        return
-
     def delete_entry(self):
-        # TODO after removing icon widget, ensure metadata is updated and icon removed
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
 
@@ -815,14 +812,16 @@ class NXSIconWidget(QLabel):
 
         msg.setStandardButtons(QMessageBox.Yes | QMessageBox.Cancel)
         if msg.exec_() == QMessageBox.Yes:
-            # TODO remove entry from metadata and remove widget from Gridlayout
-            print("Removing from entry")
+            nxs.NexusMetaData().remove_entry(tab_name=self.tab_name, group_name=self.group_name,
+                                           entry_name=self.entry_name)
             # Removing widget from parent layout
             self.setParent(None)
             self.deleteLater()
-        # TODO reshuffle layout of gridlayout to remove holes in layout
+
+            self.parent.refresh_layout(force=True)
         else:
             return
+
 
 
 if __name__ == '__main__':
